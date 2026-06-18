@@ -38,9 +38,9 @@ export const AuthProvider = ({ children }) => {
     }
   };
 
-  const googleLogin = async (credential) => {
+  const googleLogin = async (access_token) => {
     try {
-      const { data } = await api.post('/users/google', { credential });
+      const { data } = await api.post('/users/google', { access_token });
       setUser(data);
       localStorage.setItem("logistic_user", JSON.stringify(data));
       return data;

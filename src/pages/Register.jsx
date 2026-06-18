@@ -24,11 +24,12 @@ const Register = () => {
       const client = window.google.accounts.oauth2.initTokenClient({
         client_id: GOOGLE_CLIENT_ID,
         scope: "openid email profile",
+        ux_mode: "popup",
         callback: async (response) => {
-          if (response.credential) {
+          if (response.access_token) {
             setGoogleLoading(true);
             try {
-              const user = await googleLogin(response.credential);
+              const user = await googleLogin(response.access_token);
               setGoogleLoading(false);
               if (user.role === "admin" || user.role === "superadmin") {
                 navigate("/admin");
