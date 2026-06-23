@@ -6,7 +6,7 @@ import { useAuth } from "../context/AuthContext";
 import Sticker from "../components/ui/Sticker";
 import FloatingElements from "../components/ui/FloatingElements";
 
-const GOOGLE_CLIENT_ID = import.meta.env.VITE_GOOGLE_CLIENT_ID || "YOUR_GOOGLE_CLIENT_ID";
+const GOOGLE_CLIENT_ID = import.meta.env.VITE_GOOGLE_CLIENT_ID || "";
 
 const Login = () => {
   const [showPassword, setShowPassword] = useState(false);
@@ -14,78 +14,65 @@ const Login = () => {
   const [googleLoading, setGoogleLoading] = useState(false);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [error, setError] = useState("");
+  // ✅ FIX: error doim string, JSX emas
+  const [errorMsg, setErrorMsg] = useState("");
+  const [showVerifyLink, setShowVerifyLink] = useState(false);
+
   const { login, googleLogin } = useAuth();
   const navigate = useNavigate();
 
   const handleGoogleLogin = () => {
-    console.log("Google login boshlandi...");
-    if (window.google && GOOGLE_CLIENT_ID !== "YOUR_GOOGLE_CLIENT_ID") {
-      const client = window.google.accounts.oauth2.initTokenClient({
-        client_id: GOOGLE_CLIENT_ID,
-        scope: "openid email profile",
-        ux_mode: "popup",
-        callback: async (response) => {
-          console.log("Google callback:", response);
-          if (response.access_token) {
-            setGoogleLoading(true);
-            try {
-              console.log("Backendga so'rov yuborilmoqda...");
-              const user = await googleLogin(response.access_token);
-              console.log("Backend javobi:", user);
-              setGoogleLoading(false);
-              if (user.role === "admin" || user.role === "superadmin") {
-                navigate("/admin");
-              } else {
-                navigate("/");
-              }
-            } catch (err) {
-              console.error("Google login xatosi:", err);
-              setGoogleLoading(false);
-              setError(err.message || "Google orqali kirishda xato yuz berdi");
-            }
-          } else {
-            console.log("Access token yo'q:", response);
-            setError("Google kirish muvaffaqiyatsiz yakunlandi");
-          }
-        },
-      });
-      client.requestAccessToken();
-    } else {
-      setError("Google Client ID sozlanmagan. Iltimos .env fayliga VITE_GOOGLE_CLIENT_ID ni qo'shing.");
+    if (!window.google || !GOOGLE_CLIENT_ID) {
+      setErrorMsg("Google Client ID sozlanmagan.");
+      return;
     }
+    const client = window.google.accounts.oauth2.initTokenClient({
+      client_id: GOOGLE_CLIENT_ID,
+      scope: "openid email profile",
+      ux_mode: "popup",
+      callback: async (response) => {
+        if (!response.access_token) {
+          setErrorMsg("Google kirish muvaffaqiyatsiz yakunlandi");
+          return;
+        }
+        setGoogleLoading(true);
+        try {
+          const user = await googleLogin(response.access_token);
+          if (user.role === "admin" || user.role === "superadmin") {
+            navigate("/admin");
+          } else {
+            navigate("/");
+          }
+        } catch (err) {
+          setErrorMsg(typeof err === "string" ? err : err?.message || "Google orqali kirishda xato");
+        } finally {
+          setGoogleLoading(false);
+        }
+      },
+    });
+    client.requestAccessToken();
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     setIsLoading(true);
-    setError("");
+    setErrorMsg("");
+    setShowVerifyLink(false);
 
     try {
       const user = await login(email, password);
-      setIsLoading(false);
       if (user.role === "admin" || user.role === "superadmin") {
         navigate("/admin");
       } else {
         navigate("/");
       }
     } catch (err) {
-      const msg = typeof err === 'string' ? err : err.message || JSON.stringify(err);
-      if (msg === 'Iltimos, avval emailingizni tasdiqlang') {
-        setError(
-          <div className="flex flex-col gap-2">
-            <span>{msg}</span>
-            <button
-              onClick={() => navigate("/tasdiqlash", { state: { email } })}
-              className="text-primary-600 underline text-left font-black uppercase text-[10px] tracking-widest mt-1"
-            >
-              Tasdiqlash sahifasiga o'tish →
-            </button>
-          </div>
-        );
-      } else {
-        setError(msg);
+      const msg = typeof err === "string" ? err : err?.message || "Xatolik yuz berdi";
+      setErrorMsg(msg);
+      if (msg === "Iltimos, avval emailingizni tasdiqlang") {
+        setShowVerifyLink(true);
       }
+    } finally {
       setIsLoading(false);
     }
   };
@@ -96,12 +83,8 @@ const Login = () => {
 
       <div className="container mx-auto max-w-6xl relative z-10">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
-          {/* Left Side: Info */}
-          <motion.div
-            initial={{ opacity: 0, x: -50 }}
-            animate={{ opacity: 1, x: 0 }}
-            className="hidden lg:block"
-          >
+          {/* Left Side */}
+          <motion.div initial={{ opacity: 0, x: -50 }} animate={{ opacity: 1, x: 0 }} className="hidden lg:block">
             <motion.div
               initial={{ opacity: 0, scale: 0.8 }}
               animate={{ opacity: 1, scale: 1 }}
@@ -114,9 +97,8 @@ const Login = () => {
               Boshqaruv Paneliga <span className="gradient-text">Xush Kelibsiz</span>
             </h1>
             <p className="text-xl text-slate-500 dark:text-slate-400 font-medium leading-relaxed mb-10 max-w-md">
-              Logistika jarayonlarini real vaqtda kuzating va boshqaring. Tizimga kirib barcha imkoniyatlardan foydalaning.
+              Logistika jarayonlarini real vaqtda kuzating va boshqaring.
             </p>
-
             <div className="space-y-6">
               {[
                 { icon: Zap, text: "Tezkor va xavfsiz boshqaruv", color: "orange" },
@@ -130,28 +112,39 @@ const Login = () => {
             </div>
           </motion.div>
 
-          {/* Right Side: Login Form */}
+          {/* Right Side */}
           <motion.div
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             className="w-full max-w-md mx-auto bg-white dark:bg-slate-800 p-10 md:p-12 rounded-[3.5rem] shadow-2xl border border-slate-100 dark:border-slate-700 relative overflow-hidden"
           >
             <div className="absolute top-0 right-0 w-40 h-40 bg-primary-600/5 rounded-full blur-3xl -z-10" />
-            
+
             <div className="flex flex-col items-center mb-10 text-center">
               <Sticker icon={LogIn} color="primary" size={32} className="mb-6" />
               <h2 className="text-3xl font-black text-slate-900 dark:text-white tracking-tight">Kirish</h2>
               <p className="text-slate-400 font-bold text-sm uppercase tracking-widest mt-2">Hisobingizga kiring</p>
             </div>
 
-            {error && (
+            {/* ✅ Error: faqat string, tasdiqlash linki alohida */}
+            {errorMsg && (
               <motion.div
                 initial={{ opacity: 0, y: -10 }}
                 animate={{ opacity: 1, y: 0 }}
-                className="mb-6 p-4 bg-rose-50 dark:bg-rose-500/10 border border-rose-100 dark:border-rose-500/20 rounded-2xl text-rose-600 dark:text-rose-400 text-sm font-bold flex items-center gap-3"
+                className="mb-6 p-4 bg-rose-50 dark:bg-rose-500/10 border border-rose-100 dark:border-rose-500/20 rounded-2xl text-rose-600 dark:text-rose-400 text-sm font-bold"
               >
-                <AlertCircle size={18} />
-                <span className="flex-1 break-words">{error}</span>
+                <div className="flex items-center gap-3">
+                  <AlertCircle size={18} className="shrink-0" />
+                  <span className="flex-1 break-words">{errorMsg}</span>
+                </div>
+                {showVerifyLink && (
+                  <button
+                    onClick={() => navigate("/tasdiqlash", { state: { email } })}
+                    className="mt-2 ml-7 text-primary-600 underline text-left font-black uppercase text-[10px] tracking-widest"
+                  >
+                    Tasdiqlash sahifasiga o'tish →
+                  </button>
+                )}
               </motion.div>
             )}
 
@@ -165,7 +158,7 @@ const Login = () => {
                     required
                     value={email}
                     onChange={(e) => setEmail(e.target.value)}
-                    placeholder="Your Email"
+                    placeholder="Email manzilingiz"
                     className="w-full pl-12 pr-6 py-4 bg-slate-50 dark:bg-slate-900 border border-slate-100 dark:border-slate-700 rounded-2xl focus:outline-none focus:ring-2 focus:ring-primary-500 transition-all font-bold dark:text-white"
                   />
                 </div>
@@ -214,10 +207,7 @@ const Login = () => {
                 className="w-full py-4 px-6 bg-white dark:bg-slate-700 border-2 border-slate-200 dark:border-slate-600 rounded-2xl font-black text-slate-700 dark:text-white flex items-center justify-center gap-3 hover:bg-slate-50 dark:hover:bg-slate-600 transition-all disabled:opacity-50"
               >
                 {googleLoading ? (
-                  <motion.div
-                    animate={{ rotate: 360 }}
-                    transition={{ duration: 1, repeat: Infinity, ease: "linear" }}
-                  >
+                  <motion.div animate={{ rotate: 360 }} transition={{ duration: 1, repeat: Infinity, ease: "linear" }}>
                     <Zap size={20} fill="currentColor" />
                   </motion.div>
                 ) : (
@@ -236,13 +226,10 @@ const Login = () => {
               <button
                 type="submit"
                 disabled={isLoading}
-                className="btn-primary w-full py-5 text-xl font-black shadow-primary-500/25 mt-4"
+                className="btn-primary w-full py-5 text-xl font-black shadow-primary-500/25"
               >
                 {isLoading ? (
-                  <motion.div
-                    animate={{ rotate: 360 }}
-                    transition={{ duration: 1, repeat: Infinity, ease: "linear" }}
-                  >
+                  <motion.div animate={{ rotate: 360 }} transition={{ duration: 1, repeat: Infinity, ease: "linear" }}>
                     <Zap size={24} fill="currentColor" />
                   </motion.div>
                 ) : (

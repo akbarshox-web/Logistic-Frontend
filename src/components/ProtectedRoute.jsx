@@ -8,11 +8,12 @@ const ProtectedRoute = ({ children, adminOnly = false }) => {
   if (loading) return null;
 
   if (!user) {
-    return <Navigate to="/login" />;
+    return <Navigate to="/login" replace />;
   }
 
+  // ✅ FIX: admin ham superadmin ham admin panelga kira oladi
   if (adminOnly && user.role !== "admin" && user.role !== "superadmin") {
-    return <Navigate to="/" />;
+    return <Navigate to="/" replace />;
   }
 
   return children;
