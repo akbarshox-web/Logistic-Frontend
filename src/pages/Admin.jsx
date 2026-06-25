@@ -157,7 +157,8 @@ const Admin = () => {
   const handleAddAdmin = async (e) => {
     e.preventDefault();
     try {
-      const { data } = await api.post('/users', { ...newAdmin, role: 'admin' });
+      // ✅ FIX: maxsus admin endpoint ishlatamiz, role ni ham yuborish uchun
+      const { data } = await api.post('/users/admin-create', { ...newAdmin, role: 'admin' });
       setAdmins(prev => [...prev, data]);
       setNewAdmin({ name: '', email: '', password: '' });
     } catch (err) {

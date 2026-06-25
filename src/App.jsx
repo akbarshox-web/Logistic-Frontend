@@ -32,13 +32,13 @@ function App(){
                   <Route path="/boglanish" element={<Contact />} />
                   <Route path="/buyurtma" element={<Order />} />
                   <Route path="/kuzatish" element={<Tracking />} />
-                  <Route 
-                    path="/admin" 
+                  <Route
+                    path="/admin"
                     element={
                       <ProtectedRoute adminOnly={true}>
                         <Admin />
                       </ProtectedRoute>
-                    } 
+                    }
                   />
                   <Route path="/login" element={<Login />} />
                   <Route path="/register" element={<Register />} />
