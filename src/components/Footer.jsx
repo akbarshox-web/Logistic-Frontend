@@ -53,6 +53,8 @@ const Footer = () => {
                 { label: "Biznes Xizmatlar", path: "/xizmatlar" },
                 { label: "Tariflar", path: "/narxlar" },
                 { label: "Yuk Kuzatish", path: "/kuzatish" },
+                { label: "Biz haqimizda", path: "/biz-haqimizda" },
+                { label: "Savollar", path: "/savollar" },
                 { label: "Bog'lanish", path: "/boglanish" },
               ].map((link, idx) => (
                 <li key={idx}>

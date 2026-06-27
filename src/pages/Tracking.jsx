@@ -1,9 +1,10 @@
 import React, { useState, useEffect } from "react";
 import { motion } from "framer-motion";
-import { Search, MapPin, Truck, CheckCircle2, Clock, AlertCircle, Zap, Shield, ArrowRight, Package } from "lucide-react";
+import { Search, MapPin, Truck, CheckCircle2, Clock, AlertCircle, Zap, Shield, ArrowRight, Package, History, User } from "lucide-react";
 import Sticker from "../components/ui/Sticker";
 import FloatingElements from "../components/ui/FloatingElements";
 import api from "../utils/api";
+import { formatDateSync as format } from "../utils/dateUtil";
 
 const STATUS_STEPS = [
   "Yangi",
@@ -11,6 +12,14 @@ const STATUS_STEPS = [
   "Yo'lda",
   "Yetkazildi",
 ];
+
+const STATUS_COLORS = {
+  'Yangi':         'bg-blue-500',
+  'Qabul qilindi': 'bg-yellow-500',
+  "Yo'lda":        'bg-orange-500',
+  'Yetkazildi':    'bg-green-500',
+  'Bekor qilindi': 'bg-rose-500',
+};
 
 const Tracking = () => {
   const [trackingId, setTrackingId] = useState("");
@@ -210,6 +219,47 @@ const Tracking = () => {
                           </div>
                         );
                       })}
+                    </div>
+                  </div>
+                )}
+
+                {/* Timeline tarix */}
+                {result.timeline && result.timeline.length > 0 && (
+                  <div className="mt-12 pt-12 border-t border-slate-100 dark:border-slate-700">
+                    <div className="flex items-center gap-3 mb-8">
+                      <div className="w-10 h-10 bg-primary-50 dark:bg-primary-500/10 rounded-xl flex items-center justify-center text-primary-600">
+                        <History size={20} />
+                      </div>
+                      <h3 className="text-2xl font-black text-slate-900 dark:text-white tracking-tight">Tracking tarixi</h3>
+                    </div>
+                    <div className="relative pl-8">
+                      <div className="absolute left-3 top-2 bottom-2 w-0.5 bg-slate-100 dark:bg-slate-700" />
+                      <div className="space-y-6">
+                        {[...result.timeline].reverse().map((event, idx) => (
+                          <div key={idx} className="relative">
+                            <div className={`absolute -left-[27px] top-1 w-4 h-4 rounded-full border-4 border-white dark:border-slate-800 shadow ${STATUS_COLORS[event.status] || 'bg-slate-400'}`} />
+                            <div className="bg-slate-50 dark:bg-slate-900/50 rounded-2xl p-4 border border-slate-100 dark:border-slate-700">
+                              <div className="flex flex-wrap items-center gap-2 mb-2">
+                                <span className="px-3 py-1 bg-white dark:bg-slate-800 rounded-lg text-xs font-black uppercase tracking-widest text-slate-700 dark:text-slate-300">
+                                  {event.status}
+                                </span>
+                                <span className="text-xs font-bold text-slate-400">
+                                  {format(new Date(event.createdAt), 'dd MMMM yyyy, HH:mm')}
+                                </span>
+                              </div>
+                              {event.note && (
+                                <p className="text-sm font-bold text-slate-600 dark:text-slate-300 mb-1">{event.note}</p>
+                              )}
+                              {event.byName && (
+                                <div className="flex items-center gap-1.5 text-xs font-bold text-slate-400">
+                                  <User size={12} />
+                                  <span>{event.byName}</span>
+                                </div>
+                              )}
+                            </div>
+                          </div>
+                        ))}
+                      </div>
                     </div>
                   </div>
                 )}

@@ -11,14 +11,14 @@ export const PartnerProvider = ({ children }) => {
     try {
       setLoading(true);
       const { data } = await api.get('/partners');
+      // api.js interceptor {success, data} → data ga normalize qilgan
       if (Array.isArray(data)) {
         setPartners(data);
       } else {
         setPartners([]);
       }
     } catch (error) {
-      // Don't show error in console for network issues
-      // Just set empty partners
+      console.warn('Partners yuklanmadi:', error.message);
       setPartners([]);
     } finally {
       setLoading(false);
@@ -32,10 +32,12 @@ export const PartnerProvider = ({ children }) => {
   const addPartner = async (partnerData) => {
     try {
       const { data } = await api.post('/partners', partnerData);
-      setPartners(prev => [...prev, data]);
-      return data;
+      // interceptor normalized → data = partner object
+      const partner = data?.data || data;
+      setPartners(prev => [...prev, partner]);
+      return partner;
     } catch (error) {
-      throw error.response?.data?.message || "Hamkor qo'shishda xato";
+      throw new Error(error.message || "Hamkor qo'shishda xato");
     }
   };
 
@@ -44,15 +46,28 @@ export const PartnerProvider = ({ children }) => {
       await api.delete(`/partners/${id}`);
       setPartners(prev => prev.filter((p) => p._id !== id));
     } catch (error) {
-      throw error.response?.data?.message || "Hamkor o'chirishda xato";
+      throw new Error(error.message || "Hamkor o'chirishda xato");
     }
   };
 
   return (
-    <PartnerContext.Provider value={{ partners, loading, addPartner, deletePartner, fetchPartners }}>
+    <PartnerContext.Provider value={{
+      partners,
+      loading,
+      addPartner,
+      deletePartner,
+      fetchPartners,
+      refetch: fetchPartners
+    }}>
       {children}
     </PartnerContext.Provider>
   );
 };
 
-export const usePartners = () => useContext(PartnerContext);
+export const usePartners = () => {
+  const context = useContext(PartnerContext);
+  if (!context) {
+    throw new Error("usePartners must be used within a PartnerProvider");
+  }
+  return context;
+};

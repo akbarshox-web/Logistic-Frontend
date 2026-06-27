@@ -8,13 +8,19 @@ import FloatingElements from "../components/ui/FloatingElements";
 
 const GOOGLE_CLIENT_ID = import.meta.env.VITE_GOOGLE_CLIENT_ID || "";
 
+// Role ga qarab yo'naltirish
+const redirectByRole = (role, navigate) => {
+  if (role === "admin" || role === "superadmin") return navigate("/admin");
+  if (role === "driver") return navigate("/driver");
+  return navigate("/panel");
+};
+
 const Login = () => {
   const [showPassword, setShowPassword] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const [googleLoading, setGoogleLoading] = useState(false);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  // ✅ FIX: error doim string, JSX emas
   const [errorMsg, setErrorMsg] = useState("");
   const [showVerifyLink, setShowVerifyLink] = useState(false);
 
@@ -38,11 +44,7 @@ const Login = () => {
         setGoogleLoading(true);
         try {
           const user = await googleLogin(response.access_token);
-          if (user.role === "admin" || user.role === "superadmin") {
-            navigate("/admin");
-          } else {
-            navigate("/");
-          }
+          redirectByRole(user.role, navigate);
         } catch (err) {
           setErrorMsg(typeof err === "string" ? err : err?.message || "Google orqali kirishda xato");
         } finally {
@@ -61,11 +63,8 @@ const Login = () => {
 
     try {
       const user = await login(email, password);
-      if (user.role === "admin" || user.role === "superadmin") {
-        navigate("/admin");
-      } else {
-        navigate("/");
-      }
+      // ✅ Role ga qarab yo'naltirish
+      redirectByRole(user.role, navigate);
     } catch (err) {
       const msg = typeof err === "string" ? err : err?.message || "Xatolik yuz berdi";
       setErrorMsg(msg);
@@ -80,29 +79,26 @@ const Login = () => {
   return (
     <div className="pt-32 pb-24 min-h-screen bg-slate-50 dark:bg-slate-900 flex items-center justify-center px-4 relative overflow-hidden">
       <FloatingElements />
-
       <div className="container mx-auto max-w-6xl relative z-10">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
-          {/* Left Side */}
+
+          {/* Left */}
           <motion.div initial={{ opacity: 0, x: -50 }} animate={{ opacity: 1, x: 0 }} className="hidden lg:block">
-            <motion.div
-              initial={{ opacity: 0, scale: 0.8 }}
-              animate={{ opacity: 1, scale: 1 }}
-              className="inline-flex items-center gap-2 px-4 py-2 rounded-2xl bg-white dark:bg-slate-800 text-primary-600 dark:text-primary-400 text-sm font-black mb-8 border border-slate-100 dark:border-slate-800 shadow-xl shadow-primary-500/5 uppercase tracking-widest"
-            >
+            <motion.div initial={{ opacity: 0, scale: 0.8 }} animate={{ opacity: 1, scale: 1 }}
+              className="inline-flex items-center gap-2 px-4 py-2 rounded-2xl bg-white dark:bg-slate-800 text-primary-600 dark:text-primary-400 text-sm font-black mb-8 border border-slate-100 dark:border-slate-800 shadow-xl uppercase tracking-widest">
               <ShieldCheck size={16} fill="currentColor" />
               <span>Xavfsiz Kirish</span>
             </motion.div>
             <h1 className="text-6xl font-black text-slate-900 dark:text-white mb-8 tracking-tighter leading-tight">
-              Boshqaruv Paneliga <span className="gradient-text">Xush Kelibsiz</span>
+              Tizimga <span className="gradient-text">Xush Kelibsiz</span>
             </h1>
             <p className="text-xl text-slate-500 dark:text-slate-400 font-medium leading-relaxed mb-10 max-w-md">
-              Logistika jarayonlarini real vaqtda kuzating va boshqaring.
+              Hisobingizga kirib barcha imkoniyatlardan foydalaning.
             </p>
             <div className="space-y-6">
               {[
-                { icon: Zap, text: "Tezkor va xavfsiz boshqaruv", color: "orange" },
-                { icon: ShieldCheck, text: "Ma'lumotlar to'liq himoyalangan", color: "green" }
+                { icon: Zap, text: "Tezkor va xavfsiz kirish", color: "orange" },
+                { icon: ShieldCheck, text: "Ma'lumotlar himoyalangan", color: "green" }
               ].map((item, i) => (
                 <div key={i} className="flex items-center gap-4">
                   <Sticker icon={item.icon} color={item.color} size={20} className="shadow-none p-2.5" />
@@ -112,12 +108,9 @@ const Login = () => {
             </div>
           </motion.div>
 
-          {/* Right Side */}
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            animate={{ opacity: 1, y: 0 }}
-            className="w-full max-w-md mx-auto bg-white dark:bg-slate-800 p-10 md:p-12 rounded-[3.5rem] shadow-2xl border border-slate-100 dark:border-slate-700 relative overflow-hidden"
-          >
+          {/* Right */}
+          <motion.div initial={{ opacity: 0, y: 30 }} animate={{ opacity: 1, y: 0 }}
+            className="w-full max-w-md mx-auto bg-white dark:bg-slate-800 p-10 md:p-12 rounded-[3.5rem] shadow-2xl border border-slate-100 dark:border-slate-700 relative overflow-hidden">
             <div className="absolute top-0 right-0 w-40 h-40 bg-primary-600/5 rounded-full blur-3xl -z-10" />
 
             <div className="flex flex-col items-center mb-10 text-center">
@@ -126,22 +119,16 @@ const Login = () => {
               <p className="text-slate-400 font-bold text-sm uppercase tracking-widest mt-2">Hisobingizga kiring</p>
             </div>
 
-            {/* ✅ Error: faqat string, tasdiqlash linki alohida */}
             {errorMsg && (
-              <motion.div
-                initial={{ opacity: 0, y: -10 }}
-                animate={{ opacity: 1, y: 0 }}
-                className="mb-6 p-4 bg-rose-50 dark:bg-rose-500/10 border border-rose-100 dark:border-rose-500/20 rounded-2xl text-rose-600 dark:text-rose-400 text-sm font-bold"
-              >
+              <motion.div initial={{ opacity: 0, y: -10 }} animate={{ opacity: 1, y: 0 }}
+                className="mb-6 p-4 bg-rose-50 dark:bg-rose-500/10 border border-rose-100 dark:border-rose-500/20 rounded-2xl text-rose-600 dark:text-rose-400 text-sm font-bold">
                 <div className="flex items-center gap-3">
                   <AlertCircle size={18} className="shrink-0" />
                   <span className="flex-1 break-words">{errorMsg}</span>
                 </div>
                 {showVerifyLink && (
-                  <button
-                    onClick={() => navigate("/tasdiqlash", { state: { email } })}
-                    className="mt-2 ml-7 text-primary-600 underline text-left font-black uppercase text-[10px] tracking-widest"
-                  >
+                  <button onClick={() => navigate("/tasdiqlash", { state: { email } })}
+                    className="mt-2 ml-7 text-primary-600 underline text-left font-black uppercase text-[10px] tracking-widest">
                     Tasdiqlash sahifasiga o'tish →
                   </button>
                 )}
@@ -153,14 +140,9 @@ const Login = () => {
                 <label className="text-xs font-black text-slate-400 uppercase tracking-widest ml-1">Email</label>
                 <div className="relative group">
                   <Mail className="absolute left-4 top-1/2 -translate-y-1/2 text-slate-400 group-focus-within:text-primary-600 transition-colors" size={20} />
-                  <input
-                    type="email"
-                    required
-                    value={email}
-                    onChange={(e) => setEmail(e.target.value)}
+                  <input type="email" required value={email} onChange={e => setEmail(e.target.value)}
                     placeholder="Email manzilingiz"
-                    className="w-full pl-12 pr-6 py-4 bg-slate-50 dark:bg-slate-900 border border-slate-100 dark:border-slate-700 rounded-2xl focus:outline-none focus:ring-2 focus:ring-primary-500 transition-all font-bold dark:text-white"
-                  />
+                    className="w-full pl-12 pr-6 py-4 bg-slate-50 dark:bg-slate-900 border border-slate-100 dark:border-slate-700 rounded-2xl focus:outline-none focus:ring-2 focus:ring-primary-500 transition-all font-bold dark:text-white" />
                 </div>
               </div>
 
@@ -171,41 +153,24 @@ const Login = () => {
                 </div>
                 <div className="relative group">
                   <Lock className="absolute left-4 top-1/2 -translate-y-1/2 text-slate-400 group-focus-within:text-primary-600 transition-colors" size={20} />
-                  <input
-                    type={showPassword ? "text" : "password"}
-                    required
-                    value={password}
-                    onChange={(e) => setPassword(e.target.value)}
+                  <input type={showPassword ? "text" : "password"} required value={password} onChange={e => setPassword(e.target.value)}
                     placeholder="••••••••"
-                    className="w-full pl-12 pr-12 py-4 bg-slate-50 dark:bg-slate-900 border border-slate-100 dark:border-slate-700 rounded-2xl focus:outline-none focus:ring-2 focus:ring-primary-500 transition-all font-bold dark:text-white"
-                  />
-                  <button
-                    type="button"
-                    onClick={() => setShowPassword(!showPassword)}
-                    className="absolute right-4 top-1/2 -translate-y-1/2 text-slate-400 hover:text-slate-600 transition-colors"
-                  >
+                    className="w-full pl-12 pr-12 py-4 bg-slate-50 dark:bg-slate-900 border border-slate-100 dark:border-slate-700 rounded-2xl focus:outline-none focus:ring-2 focus:ring-primary-500 transition-all font-bold dark:text-white" />
+                  <button type="button" onClick={() => setShowPassword(!showPassword)}
+                    className="absolute right-4 top-1/2 -translate-y-1/2 text-slate-400 hover:text-slate-600 transition-colors">
                     {showPassword ? <EyeOff size={20} /> : <Eye size={20} />}
                   </button>
                 </div>
               </div>
 
-              <div className="flex items-center gap-3 ml-1 pt-2">
-                <input type="checkbox" id="remember" className="w-5 h-5 accent-primary-600 rounded-lg cursor-pointer" />
-                <label htmlFor="remember" className="text-sm font-bold text-slate-500 dark:text-slate-400 cursor-pointer">Eslab qolish</label>
-              </div>
-
               <div className="relative flex py-2 items-center">
                 <div className="flex-grow border-t border-slate-200 dark:border-slate-600"></div>
-                <span className="flex-shrink mx-4 text-slate-400 dark:text-slate-500 font-bold text-xs uppercase tracking-widest">yoki</span>
+                <span className="flex-shrink mx-4 text-slate-400 font-bold text-xs uppercase tracking-widest">yoki</span>
                 <div className="flex-grow border-t border-slate-200 dark:border-slate-600"></div>
               </div>
 
-              <button
-                type="button"
-                onClick={handleGoogleLogin}
-                disabled={googleLoading}
-                className="w-full py-4 px-6 bg-white dark:bg-slate-700 border-2 border-slate-200 dark:border-slate-600 rounded-2xl font-black text-slate-700 dark:text-white flex items-center justify-center gap-3 hover:bg-slate-50 dark:hover:bg-slate-600 transition-all disabled:opacity-50"
-              >
+              <button type="button" onClick={handleGoogleLogin} disabled={googleLoading}
+                className="w-full py-4 px-6 bg-white dark:bg-slate-700 border-2 border-slate-200 dark:border-slate-600 rounded-2xl font-black text-slate-700 dark:text-white flex items-center justify-center gap-3 hover:bg-slate-50 dark:hover:bg-slate-600 transition-all disabled:opacity-50">
                 {googleLoading ? (
                   <motion.div animate={{ rotate: 360 }} transition={{ duration: 1, repeat: Infinity, ease: "linear" }}>
                     <Zap size={20} fill="currentColor" />
@@ -223,20 +188,13 @@ const Login = () => {
                 )}
               </button>
 
-              <button
-                type="submit"
-                disabled={isLoading}
-                className="btn-primary w-full py-5 text-xl font-black shadow-primary-500/25"
-              >
+              <button type="submit" disabled={isLoading} className="btn-primary w-full py-5 text-xl font-black shadow-primary-500/25">
                 {isLoading ? (
                   <motion.div animate={{ rotate: 360 }} transition={{ duration: 1, repeat: Infinity, ease: "linear" }}>
                     <Zap size={24} fill="currentColor" />
                   </motion.div>
                 ) : (
-                  <>
-                    Tizimga kirish
-                    <ArrowRight size={24} strokeWidth={3} />
-                  </>
+                  <> Tizimga kirish <ArrowRight size={24} strokeWidth={3} /> </>
                 )}
               </button>
             </form>
