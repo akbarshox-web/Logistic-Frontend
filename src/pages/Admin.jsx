@@ -210,7 +210,8 @@ const Admin = () => {
       setOrders(prev => prev.map(o => o._id === id ? data : o));
       if (selectedOrder?._id === id) setSelectedOrder(data);
     } catch (err) {
-      alert(err.response?.data?.message || 'Xatolik');
+      console.error('❌ Order update xatosi:', err.response?.data || err);
+      alert(err.response?.data?.message || err.message || 'Xatolik');
     }
   };
 
