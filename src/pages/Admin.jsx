@@ -47,10 +47,11 @@ const ORDER_PAGE_SIZE = 10;
 // ── PDF Export ──
 async function exportOrdersPdf(orders) {
   try {
-    // @vite-ignore
-    const { jsPDF } = await import(/* @vite-ignore */ 'jspdf');
-    // @vite-ignore
-    const autoTable = (await import(/* @vite-ignore */ 'jspdf-autotable')).default;
+    // String o'zgaruvchidan foydalanish Vite'ni importni tahlil qilishdan to'xtatadi
+    const jsPdfModule = 'jspdf';
+    const autoTableModule = 'jspdf-autotable';
+    const { jsPDF } = await import(/* @vite-ignore */ jsPdfModule);
+    const autoTable = (await import(/* @vite-ignore */ autoTableModule)).default;
     const doc = new jsPDF();
 
     doc.setFontSize(16);
