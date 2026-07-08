@@ -1,3 +1,4 @@
+import { useEffect } from "react";
 import { BrowserRouter as Router, Routes, Route, Navigate, useLocation } from "react-router-dom";
 import { AuthProvider, useAuth } from "./context/AuthContext";
 import { ThemeProvider } from "./context/ThemeContext";
@@ -185,12 +186,23 @@ function AppRoutes() {
   );
 }
 
+function ScrollToTop() {
+  const { pathname } = useLocation();
+
+  useEffect(() => {
+    window.scrollTo({ top: 0, left: 0, behavior: "instant" });
+  }, [pathname]);
+
+  return null;
+}
+
 function App() {
   return (
     <ThemeProvider>
       <AuthProvider>
         <PartnerProvider>
           <Router>
+            <ScrollToTop />
             <AppRoutes />
           </Router>
         </PartnerProvider>

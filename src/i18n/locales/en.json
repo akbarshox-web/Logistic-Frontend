@@ -1,0 +1,354 @@
+{
+  "common": {
+    "loading": "Loading...",
+    "save": "Save",
+    "cancel": "Cancel",
+    "edit": "Edit",
+    "delete": "Delete",
+    "search": "Search",
+    "send": "Send",
+    "submit": "Submit",
+    "back": "Back",
+    "next": "Next",
+    "previous": "Previous",
+    "yes": "Yes",
+    "no": "No",
+    "all": "All",
+    "more": "More",
+    "close": "Close",
+    "open": "Open",
+    "error": "Error",
+    "success": "Success",
+    "warning": "Warning",
+    "info": "Info",
+    "language": "Language",
+    "darkMode": "Dark mode",
+    "lightMode": "Light mode",
+    "viewAll": "View all",
+    "seeMore": "See more",
+    "from": "from",
+    "to": "to"
+  },
+  "nav": {
+    "home": "Home",
+    "services": "Services",
+    "pricing": "Pricing",
+    "about": "About",
+    "faq": "FAQ",
+    "contact": "Contact",
+    "order": "Order",
+    "tracking": "Tracking",
+    "admin": "Admin",
+    "login": "Login",
+    "logout": "Logout",
+    "register": "Sign up",
+    "profile": "Profile",
+    "myOrders": "My Orders",
+    "notifications": "Notifications",
+    "start": "Get started",
+    "placeOrder": "Place order"
+  },
+  "footer": {
+    "tagline": "We are a leading company providing cargo transportation and logistics solutions worldwide. Your cargo is our responsibility.",
+    "company": "Company",
+    "contactTitle": "Contact",
+    "newsletter": "Newsletter",
+    "newsletterDesc": "Stay updated with the latest promotions and news.",
+    "emailPlaceholder": "Your email address",
+    "copyright": "Logistics of the future.",
+    "privacy": "Privacy Policy",
+    "terms": "Terms of Use",
+    "address": "Logistic Business Center, 108 Global Ave",
+    "phone": "+998 71 200 00 00",
+    "email": "info@logisticpro.uz",
+    "social": {
+      "facebook": "Facebook",
+      "instagram": "Instagram",
+      "twitter": "Twitter",
+      "linkedin": "Linkedin"
+    },
+    "links": {
+      "home": "Home",
+      "services": "Business Services",
+      "pricing": "Pricing",
+      "tracking": "Cargo Tracking",
+      "about": "About Us",
+      "faq": "FAQ",
+      "contact": "Contact"
+    }
+  },
+  "home": {
+    "hero": {
+      "badge": "NEW LOGISTICS TECHNOLOGY",
+      "title": "We deliver your cargo",
+      "titleHighlight": "fast and reliable",
+      "titleEnd": "",
+      "subtitle": "Take your business global with modern logistics solutions. Fast, secure, and transparent service.",
+      "cta": "Place order",
+      "ctaSecondary": "Learn more"
+    },
+    "stats": {
+      "deliveries": "Successful deliveries",
+      "countries": "Countries",
+      "clients": "Happy clients",
+      "experience": "Years of experience"
+    },
+    "features": {
+      "title": "Why choose us?",
+      "subtitle": "We provide the best solutions for your logistics needs",
+      "fast": {
+        "title": "Fast delivery",
+        "desc": "We deliver your cargo in the shortest time possible"
+      },
+      "secure": {
+        "title": "Security",
+        "desc": "Your cargo is fully insured and protected"
+      },
+      "tracking": {
+        "title": "Online tracking",
+        "desc": "Track your cargo status anytime"
+      },
+      "support": {
+        "title": "24/7 Support",
+        "desc": "We're always in touch and ready to answer any question"
+      }
+    }
+  },
+  "auth": {
+    "login": {
+      "title": "Sign in",
+      "subtitle": "Sign in to your account and use our services",
+      "email": "Email",
+      "password": "Password",
+      "remember": "Remember me",
+      "submit": "Sign in",
+      "noAccount": "Don't have an account?",
+      "register": "Sign up",
+      "forgot": "Forgot password?",
+      "orContinue": "or",
+      "googleLogin": "Sign in with Google"
+    },
+    "register": {
+      "title": "Sign up",
+      "subtitle": "Create a new account and use our logistics services",
+      "name": "Name",
+      "email": "Email",
+      "phone": "Phone number",
+      "password": "Password",
+      "confirmPassword": "Confirm password",
+      "submit": "Sign up",
+      "haveAccount": "Already have an account?",
+      "login": "Sign in",
+      "agree": "I agree to the terms of use",
+      "selectRole": "Select role",
+      "client": "Client",
+      "driver": "Driver"
+    },
+    "verify": {
+      "title": "Verify email",
+      "subtitle": "Enter the code sent to your email",
+      "code": "Verification code",
+      "submit": "Verify",
+      "resend": "Resend code",
+      "noCode": "Didn't receive a code?"
+    }
+  },
+  "order": {
+    "title": "Place an order",
+    "subtitle": "Enter your cargo details and we'll contact you",
+    "fromAddress": "From",
+    "toAddress": "To",
+    "cargoType": "Cargo type",
+    "weight": "Weight (kg)",
+    "volume": "Volume (m³)",
+    "date": "Delivery date",
+    "description": "Additional information",
+    "name": "Your name",
+    "phone": "Phone number",
+    "submit": "Place order",
+    "success": "Your order has been received! We'll contact you soon.",
+    "calculate": "Calculate price",
+    "estimatedPrice": "Estimated price",
+    "selectType": "Select cargo type",
+    "types": {
+      "documents": "Documents",
+      "parcel": "Parcel",
+      "furniture": "Furniture",
+      "fragile": "Fragile items",
+      "vehicle": "Vehicle",
+      "other": "Other"
+    }
+  },
+  "tracking": {
+    "title": "Track cargo",
+    "subtitle": "Enter your order number and track your cargo status",
+    "placeholder": "Enter order number",
+    "track": "Track",
+    "status": "Status",
+    "estimatedDelivery": "Estimated delivery",
+    "currentLocation": "Current location",
+    "history": "History",
+    "notFound": "Order not found. Please check the number.",
+    "statuses": {
+      "created": "Created",
+      "accepted": "Accepted",
+      "picked_up": "Picked up",
+      "in_transit": "In transit",
+      "delivered": "Delivered",
+      "cancelled": "Cancelled"
+    }
+  },
+  "about": {
+    "title": "About us",
+    "subtitle": "We have 10+ years of experience in logistics",
+    "mission": "Our mission",
+    "missionText": "To provide our clients with the fastest, most reliable, and modern logistics services.",
+    "vision": "Our vision",
+    "visionText": "To become the most advanced logistics company in Central Asia.",
+    "values": "Our values",
+    "team": "Our team",
+    "history": "History"
+  },
+  "services": {
+    "title": "Our services",
+    "subtitle": "Professional logistics solutions for every need",
+    "land": {
+      "title": "Land transport",
+      "desc": "Cargo transportation by road and rail"
+    },
+    "air": {
+      "title": "Air transport",
+      "desc": "Air freight services for fast delivery"
+    },
+    "sea": {
+      "title": "Sea transport",
+      "desc": "Maritime shipping for large-volume cargo"
+    },
+    "warehouse": {
+      "title": "Warehouse",
+      "desc": "Cargo storage and management services"
+    },
+    "customs": {
+      "title": "Customs services",
+      "desc": "Document processing and customs assistance"
+    },
+    "express": {
+      "title": "Express delivery",
+      "desc": "Urgent delivery within 24 hours"
+    }
+  },
+  "pricing": {
+    "title": "Pricing",
+    "subtitle": "Transparent and fair pricing",
+    "month": "per month",
+    "year": "per year",
+    "basic": {
+      "title": "Basic",
+      "subtitle": "For small businesses"
+    },
+    "pro": {
+      "title": "Professional",
+      "subtitle": "For medium businesses"
+    },
+    "enterprise": {
+      "title": "Enterprise",
+      "subtitle": "For large companies"
+    },
+    "choose": "Choose",
+    "popular": "Popular",
+    "features": {
+      "shipments": "shipments",
+      "tracking": "Online tracking",
+      "support": "Support",
+      "warehouse": "Warehouse",
+      "manager": "Personal manager"
+    }
+  },
+  "contact": {
+    "title": "Contact us",
+    "subtitle": "Have questions? We're here to help!",
+    "name": "Your name",
+    "email": "Email",
+    "phone": "Phone",
+    "message": "Your message",
+    "submit": "Send",
+    "success": "Your message has been sent! We'll respond soon.",
+    "address": "Address",
+    "phoneLabel": "Phone",
+    "emailLabel": "Email",
+    "workingHours": "Working hours",
+    "workingHoursValue": "Mon - Sat: 09:00 - 18:00"
+  },
+  "faq": {
+    "title": "Frequently asked questions",
+    "subtitle": "Answers to the most common questions",
+    "noAnswer": "Didn't find an answer?",
+    "contactUs": "Contact us"
+  },
+  "profile": {
+    "title": "My profile",
+    "personal": "Personal info",
+    "security": "Security",
+    "settings": "Settings",
+    "name": "Name",
+    "email": "Email",
+    "phone": "Phone",
+    "address": "Address",
+    "changePassword": "Change password",
+    "currentPassword": "Current password",
+    "newPassword": "New password",
+    "confirmPassword": "Confirm password",
+    "save": "Save",
+    "saved": "Data saved",
+    "avatar": "Profile picture"
+  },
+  "myOrders": {
+    "title": "My orders",
+    "noOrders": "No orders yet",
+    "createFirst": "Place your first order",
+    "orderNumber": "Order number",
+    "date": "Date",
+    "status": "Status",
+    "from": "From",
+    "to": "To",
+    "price": "Price",
+    "details": "Details"
+  },
+  "notifications": {
+    "title": "Notifications",
+    "noNotifications": "No notifications yet",
+    "markAllRead": "Mark all as read",
+    "new": "New"
+  },
+  "admin": {
+    "dashboard": "Dashboard",
+    "users": "Users",
+    "orders": "Orders",
+    "drivers": "Drivers",
+    "statistics": "Statistics",
+    "activityLog": "Activity log",
+    "settings": "Settings",
+    "totalUsers": "Total users",
+    "totalOrders": "Total orders",
+    "revenue": "Revenue",
+    "activeDrivers": "Active drivers"
+  },
+  "driver": {
+    "panel": "Driver panel",
+    "availableOrders": "Available orders",
+    "myTrips": "My trips",
+    "earnings": "Earnings",
+    "accept": "Accept",
+    "start": "Start",
+    "complete": "Complete",
+    "online": "Online",
+    "offline": "Offline"
+  },
+  "errors": {
+    "404": "Page not found",
+    "404desc": "The page you are looking for doesn't exist",
+    "500": "Server error",
+    "500desc": "An error occurred on the server. Please try again later.",
+    "goHome": "Go back home"
+  }
+}

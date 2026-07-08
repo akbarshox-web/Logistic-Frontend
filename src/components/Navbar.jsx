@@ -2,10 +2,12 @@ import React, { useState, useEffect } from "react";
 import { Link, useLocation } from "react-router-dom";
 import { motion, AnimatePresence } from "framer-motion";
 import { Truck, Menu, X, ChevronRight, LogOut, User, Sun, Moon, Bell, Package, HelpCircle, Info } from "lucide-react";
+import { useTranslation } from "react-i18next";
 import { cn } from "../utils/cn";
 import { useAuth } from "../context/AuthContext";
 import { useTheme } from "../context/ThemeContext";
 import Sticker from "./ui/Sticker";
+import LanguageSwitcher from "./LanguageSwitcher";
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -13,6 +15,7 @@ const Navbar = () => {
   const location = useLocation();
   const { user, logout, dbError } = useAuth();
   const { isDarkMode, toggleTheme } = useTheme();
+  const { t } = useTranslation();
 
   useEffect(() => {
     const handleScroll = () => setScrolled(window.scrollY > 20);
@@ -24,12 +27,12 @@ const Navbar = () => {
   const isAdminUser = user?.role === "admin" || user?.role === "superadmin";
 
   const navLinks = [
-    { title: "Asosiy", path: "/" },
-    { title: "Xizmatlar", path: "/xizmatlar" },
-    { title: "Narxlar", path: "/narxlar" },
-    { title: "Biz haqimizda", path: "/biz-haqimizda" },
-    { title: "Savollar", path: "/savollar" },
-    { title: "Bog'lanish", path: "/boglanish" },
+    { title: t("nav.home"), path: "/" },
+    { title: t("nav.services"), path: "/xizmatlar" },
+    { title: t("nav.pricing"), path: "/narxlar" },
+    { title: t("nav.about"), path: "/biz-haqimizda" },
+    { title: t("nav.faq"), path: "/savollar" },
+    { title: t("nav.contact"), path: "/boglanish" },
   ];
 
   return (
@@ -78,12 +81,13 @@ const Navbar = () => {
                   location.pathname === "/admin" ? "text-primary-600" : "text-orange-500"
                 )}
               >
-                Admin
+                {t("nav.admin")}
               </Link>
             )}
           </div>
 
-          <div className="hidden lg:flex items-center gap-6">
+          <div className="hidden lg:flex items-center gap-4">
+            <LanguageSwitcher />
             <button onClick={toggleTheme} className="p-2.5 rounded-xl bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-400 hover:bg-slate-200 dark:hover:bg-slate-700 transition-all">
               {isDarkMode ? <Sun size={20} /> : <Moon size={20} />}
             </button>
@@ -93,14 +97,14 @@ const Navbar = () => {
                 <Link
                   to="/notifications"
                   className="p-2.5 rounded-xl bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-400 hover:bg-slate-200 dark:hover:bg-slate-700 transition-all relative"
-                  title="Bildirishnomalar"
+                  title={t("nav.notifications")}
                 >
                   <Bell size={18} />
                 </Link>
                 <Link
                   to="/my-orders"
                   className="p-2.5 rounded-xl bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-400 hover:bg-slate-200 dark:hover:bg-slate-700 transition-all"
-                  title="Buyurtmalarim"
+                  title={t("nav.myOrders")}
                 >
                   <Package size={18} />
                 </Link>
@@ -111,22 +115,23 @@ const Navbar = () => {
                   <User size={16} className="text-slate-500" />
                   <span className="text-xs font-black uppercase tracking-wider text-slate-700 dark:text-slate-300">{user.name}</span>
                 </Link>
-                <button onClick={logout} className="text-rose-500 hover:text-rose-600 transition-colors p-2" title="Chiqish">
+                <button onClick={logout} className="text-rose-500 hover:text-rose-600 transition-colors p-2" title={t("nav.logout")}>
                   <LogOut size={20} />
                 </button>
               </div>
             ) : (
               <Link to="/login" className="text-sm font-black uppercase tracking-widest text-slate-500 dark:text-slate-400 hover:text-primary-600 transition-colors">
-                Kirish
+                {t("nav.login")}
               </Link>
             )}
 
             <Link to="/buyurtma" className="btn-primary py-3 px-8 text-sm uppercase tracking-widest font-black">
-              Boshlash
+              {t("nav.start")}
             </Link>
           </div>
 
-          <div className="flex lg:hidden items-center gap-3">
+          <div className="flex lg:hidden items-center gap-2">
+            <LanguageSwitcher />
             <button onClick={toggleTheme} className="w-10 h-10 flex items-center justify-center bg-white/50 dark:bg-slate-800/50 backdrop-blur-md rounded-xl border border-white/50 dark:border-slate-700/50 shadow-sm text-slate-900 dark:text-white">
               {isDarkMode ? <Sun size={20} /> : <Moon size={20} />}
             </button>
@@ -177,7 +182,7 @@ const Navbar = () => {
                 ))}
                 {isAdminUser && (
                   <Link to="/admin" onClick={() => setIsOpen(false)} className="text-3xl font-black text-orange-500">
-                    Admin Panel
+                    {t("nav.admin")} Panel
                   </Link>
                 )}
               </div>
@@ -186,15 +191,15 @@ const Navbar = () => {
                 {user ? (
                   <button onClick={logout} className="w-full py-5 text-xl font-black text-rose-500 bg-rose-50 dark:bg-rose-500/10 rounded-2xl flex items-center justify-center gap-3">
                     <LogOut size={24} />
-                    Chiqish
+                    {t("nav.logout")}
                   </button>
                 ) : (
                   <Link to="/login" onClick={() => setIsOpen(false)} className="w-full py-5 text-xl font-black text-center bg-slate-100 dark:bg-slate-800 dark:text-white rounded-2xl block">
-                    Kirish
+                    {t("nav.login")}
                   </Link>
                 )}
                 <Link to="/buyurtma" onClick={() => setIsOpen(false)} className="btn-primary w-full py-5 text-xl font-black">
-                  Buyurtma berish
+                  {t("nav.placeOrder")}
                 </Link>
               </div>
             </div>

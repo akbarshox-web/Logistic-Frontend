@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { motion } from "framer-motion";
 import { Search, MapPin, Truck, CheckCircle2, Clock, AlertCircle, Zap, Shield, ArrowRight, Package, History, User } from "lucide-react";
+import { useTranslation } from "react-i18next";
 import Sticker from "../components/ui/Sticker";
 import FloatingElements from "../components/ui/FloatingElements";
 import api from "../utils/api";
@@ -22,6 +23,7 @@ const STATUS_COLORS = {
 };
 
 const Tracking = () => {
+  const { t } = useTranslation();
   const [trackingId, setTrackingId] = useState("");
   const [isSearching, setIsSearching] = useState(false);
   const [result, setResult] = useState(null);
@@ -79,13 +81,13 @@ const Tracking = () => {
               className="inline-flex items-center gap-2 px-4 py-2 rounded-2xl bg-white dark:bg-slate-800 text-primary-600 dark:text-primary-400 text-sm font-black mb-8 border border-slate-100 dark:border-slate-800 shadow-xl shadow-primary-500/5 uppercase tracking-widest"
             >
               <Shield size={16} fill="currentColor" />
-              <span>Real vaqtda kuzatuv</span>
+              <span>{t("tracking.title")}</span>
             </motion.div>
             <h1 className="text-5xl md:text-7xl font-black text-slate-900 dark:text-white mb-8 tracking-tighter">
-              Yukingizni <span className="gradient-text">Kuzating</span>
+              {t("tracking.title")} <span className="gradient-text">Live</span>
             </h1>
             <p className="text-xl text-slate-500 dark:text-slate-400 font-medium">
-              Buyurtma raqamini kiriting va yukingiz holati haqida ma'lumot oling.
+              {t("tracking.subtitle")}
             </p>
           </div>
 
@@ -97,7 +99,7 @@ const Tracking = () => {
                 <Search className="absolute left-6 top-1/2 -translate-y-1/2 text-slate-400 dark:text-slate-500" size={24} />
                 <input
                   type="text"
-                  placeholder="Masalan: LOG12345678"
+                  placeholder={t("tracking.placeholder")}
                   className="w-full pl-16 pr-6 py-6 bg-slate-50 dark:bg-slate-900 border border-slate-100 dark:border-slate-700 rounded-2xl focus:outline-none focus:ring-2 focus:ring-primary-500 transition-all text-xl font-bold dark:text-white"
                   value={trackingId}
                   onChange={(e) => setTrackingId(e.target.value)}
@@ -113,7 +115,7 @@ const Tracking = () => {
                     <Clock size={24} strokeWidth={3} />
                   </motion.div>
                 ) : (
-                  <>Kuzatish <ArrowRight size={24} strokeWidth={3} /></>
+                  <>{t("tracking.track")} <ArrowRight size={24} strokeWidth={3} /></>
                 )}
               </button>
             </form>

@@ -29,7 +29,7 @@ const FAQ = () => {
     try {
       const { data } = await api.get('/faqs');
       setFaqs(Array.isArray(data) ? data : []);
-    } catch (e) {
+    } catch {
       setFaqs([]);
     } finally {
       setLoading(false);
@@ -90,11 +90,10 @@ const FAQ = () => {
             <button
               key={c.id}
               onClick={() => setCategory(c.id)}
-              className={`px-5 py-2.5 rounded-2xl font-black text-sm whitespace-nowrap transition-all flex items-center gap-2 ${
-                category === c.id
+              className={`px-5 py-2.5 rounded-2xl font-black text-sm whitespace-nowrap transition-all flex items-center gap-2 ${category === c.id
                   ? 'bg-primary-600 text-white shadow-lg shadow-primary-500/30'
                   : 'bg-white dark:bg-slate-800 text-slate-500 dark:text-slate-400 border border-slate-100 dark:border-slate-700 hover:text-slate-900 dark:hover:text-white'
-              }`}
+                }`}
             >
               {c.id !== 'all' && <Tag size={14} />}
               {c.label}

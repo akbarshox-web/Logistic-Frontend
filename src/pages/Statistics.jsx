@@ -10,7 +10,6 @@ import dynamicImport from "../utils/dynamicImport";
 
 const Statistics = () => {
   const [stats, setStats] = useState(null);
-  const [activities, setActivities] = useState([]);
   const [loading, setLoading] = useState(true);
   const [ChartComponent, setChartComponent] = useState(null);
 
@@ -31,11 +30,11 @@ const Statistics = () => {
         setChartComponent(({ type, data, options }) => {
           const Tag = type === 'line' ? reactChart.Line
             : type === 'doughnut' ? reactChart.Doughnut
-            : type === 'pie' ? reactChart.Pie
-            : reactChart.Bar;
+              : type === 'pie' ? reactChart.Pie
+                : reactChart.Bar;
           return <Tag data={data} options={options} />;
         });
-      } catch (e) {
+      } catch {
         // Chart.js o'rnatilmagan — fallback
         if (mounted) setChartComponent(false);
       }
@@ -51,8 +50,7 @@ const Statistics = () => {
         api.get('/activities/recent?limit=20'),
       ]);
       setStats(dash);
-      setActivities(Array.isArray(act) ? act : []);
-    } catch (e) { /* ignore */ }
+    } catch { /* ignore */ }
     finally { setLoading(false); }
   };
 

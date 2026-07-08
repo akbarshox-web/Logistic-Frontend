@@ -1,0 +1,354 @@
+{
+  "common": {
+    "loading": "Laden...",
+    "save": "Speichern",
+    "cancel": "Abbrechen",
+    "edit": "Bearbeiten",
+    "delete": "Löschen",
+    "search": "Suchen",
+    "send": "Senden",
+    "submit": "Absenden",
+    "back": "Zurück",
+    "next": "Weiter",
+    "previous": "Vorherige",
+    "yes": "Ja",
+    "no": "Nein",
+    "all": "Alle",
+    "more": "Mehr",
+    "close": "Schließen",
+    "open": "Öffnen",
+    "error": "Fehler",
+    "success": "Erfolg",
+    "warning": "Warnung",
+    "info": "Info",
+    "language": "Sprache",
+    "darkMode": "Dunkelmodus",
+    "lightMode": "Heller Modus",
+    "viewAll": "Alle anzeigen",
+    "seeMore": "Mehr sehen",
+    "from": "von",
+    "to": "bis"
+  },
+  "nav": {
+    "home": "Startseite",
+    "services": "Dienstleistungen",
+    "pricing": "Preise",
+    "about": "Über uns",
+    "faq": "FAQ",
+    "contact": "Kontakt",
+    "order": "Bestellung",
+    "tracking": "Verfolgung",
+    "admin": "Admin",
+    "login": "Anmelden",
+    "logout": "Abmelden",
+    "register": "Registrieren",
+    "profile": "Profil",
+    "myOrders": "Meine Bestellungen",
+    "notifications": "Benachrichtigungen",
+    "start": "Loslegen",
+    "placeOrder": "Bestellung aufgeben"
+  },
+  "footer": {
+    "tagline": "Wir sind ein führendes Unternehmen, das weltweit Transport- und Logistiklösungen anbietet. Ihre Fracht ist unsere Verantwortung.",
+    "company": "Unternehmen",
+    "contactTitle": "Kontakt",
+    "newsletter": "Newsletter",
+    "newsletterDesc": "Bleiben Sie mit den neuesten Aktionen und Nachrichten auf dem Laufenden.",
+    "emailPlaceholder": "Ihre E-Mail-Adresse",
+    "copyright": "Logistik der Zukunft.",
+    "privacy": "Datenschutzrichtlinie",
+    "terms": "Nutzungsbedingungen",
+    "address": "Logistic Business Center, 108 Global Ave",
+    "phone": "+998 71 200 00 00",
+    "email": "info@logisticpro.uz",
+    "social": {
+      "facebook": "Facebook",
+      "instagram": "Instagram",
+      "twitter": "Twitter",
+      "linkedin": "Linkedin"
+    },
+    "links": {
+      "home": "Startseite",
+      "services": "Unternehmensdienste",
+      "pricing": "Preise",
+      "tracking": "Frachtverfolgung",
+      "about": "Über uns",
+      "faq": "FAQ",
+      "contact": "Kontakt"
+    }
+  },
+  "home": {
+    "hero": {
+      "badge": "NEUE LOGISTIKTECHNOLOGIE",
+      "title": "Wir liefern Ihre Fracht",
+      "titleHighlight": "schnell und zuverlässig",
+      "titleEnd": "",
+      "subtitle": "Bringen Sie Ihr Unternehmen mit modernen Logistiklösungen auf die globale Ebene. Schneller, sicherer und transparenter Service.",
+      "cta": "Bestellung aufgeben",
+      "ctaSecondary": "Mehr erfahren"
+    },
+    "stats": {
+      "deliveries": "Erfolgreiche Lieferungen",
+      "countries": "Länder",
+      "clients": "Zufriedene Kunden",
+      "experience": "Jahre Erfahrung"
+    },
+    "features": {
+      "title": "Warum wir?",
+      "subtitle": "Wir bieten die besten Lösungen für Ihre Logistikanforderungen",
+      "fast": {
+        "title": "Schnelle Lieferung",
+        "desc": "Wir liefern Ihre Fracht so schnell wie möglich"
+      },
+      "secure": {
+        "title": "Sicherheit",
+        "desc": "Ihre Fracht ist voll versichert und geschützt"
+      },
+      "tracking": {
+        "title": "Online-Verfolgung",
+        "desc": "Verfolgen Sie den Status Ihrer Fracht jederzeit"
+      },
+      "support": {
+        "title": "24/7 Support",
+        "desc": "Wir sind immer erreichbar und bereit, jede Frage zu beantworten"
+      }
+    }
+  },
+  "auth": {
+    "login": {
+      "title": "Einloggen",
+      "subtitle": "Melden Sie sich an, um unsere Dienste zu nutzen",
+      "email": "E-Mail",
+      "password": "Passwort",
+      "remember": "Angemeldet bleiben",
+      "submit": "Einloggen",
+      "noAccount": "Noch kein Konto?",
+      "register": "Registrieren",
+      "forgot": "Passwort vergessen?",
+      "orContinue": "oder",
+      "googleLogin": "Mit Google anmelden"
+    },
+    "register": {
+      "title": "Registrieren",
+      "subtitle": "Erstellen Sie ein neues Konto, um unsere Dienste zu nutzen",
+      "name": "Name",
+      "email": "E-Mail",
+      "phone": "Telefonnummer",
+      "password": "Passwort",
+      "confirmPassword": "Passwort bestätigen",
+      "submit": "Registrieren",
+      "haveAccount": "Bereits ein Konto?",
+      "login": "Einloggen",
+      "agree": "Ich stimme den Nutzungsbedingungen zu",
+      "selectRole": "Rolle auswählen",
+      "client": "Kunde",
+      "driver": "Fahrer"
+    },
+    "verify": {
+      "title": "E-Mail bestätigen",
+      "subtitle": "Geben Sie den an Ihre E-Mail gesendeten Code ein",
+      "code": "Bestätigungscode",
+      "submit": "Bestätigen",
+      "resend": "Code erneut senden",
+      "noCode": "Keinen Code erhalten?"
+    }
+  },
+  "order": {
+    "title": "Bestellung aufgeben",
+    "subtitle": "Geben Sie Ihre Frachtdetails ein und wir kontaktieren Sie",
+    "fromAddress": "Von",
+    "toAddress": "Nach",
+    "cargoType": "Frachtart",
+    "weight": "Gewicht (kg)",
+    "volume": "Volumen (m³)",
+    "date": "Lieferdatum",
+    "description": "Zusätzliche Informationen",
+    "name": "Ihr Name",
+    "phone": "Telefonnummer",
+    "submit": "Bestellung aufgeben",
+    "success": "Ihre Bestellung ist eingegangen! Wir kontaktieren Sie in Kürze.",
+    "calculate": "Preis berechnen",
+    "estimatedPrice": "Geschätzter Preis",
+    "selectType": "Frachtart auswählen",
+    "types": {
+      "documents": "Dokumente",
+      "parcel": "Paket",
+      "furniture": "Möbel",
+      "fragile": "Zerbrechlich",
+      "vehicle": "Fahrzeug",
+      "other": "Andere"
+    }
+  },
+  "tracking": {
+    "title": "Fracht verfolgen",
+    "subtitle": "Geben Sie Ihre Bestellnummer ein und verfolgen Sie Ihre Fracht",
+    "placeholder": "Bestellnummer eingeben",
+    "track": "Verfolgen",
+    "status": "Status",
+    "estimatedDelivery": "Voraussichtliche Lieferung",
+    "currentLocation": "Aktueller Standort",
+    "history": "Verlauf",
+    "notFound": "Bestellung nicht gefunden. Bitte überprüfen Sie die Nummer.",
+    "statuses": {
+      "created": "Erstellt",
+      "accepted": "Angenommen",
+      "picked_up": "Abgeholt",
+      "in_transit": "Unterwegs",
+      "delivered": "Geliefert",
+      "cancelled": "Storniert"
+    }
+  },
+  "about": {
+    "title": "Über uns",
+    "subtitle": "Wir haben über 10 Jahre Erfahrung in der Logistik",
+    "mission": "Unsere Mission",
+    "missionText": "Unseren Kunden die schnellsten, zuverlässigsten und modernsten Logistikdienste zu bieten.",
+    "vision": "Unsere Vision",
+    "visionText": "Das fortschrittlichste Logistikunternehmen in Zentralasien zu werden.",
+    "values": "Unsere Werte",
+    "team": "Unser Team",
+    "history": "Geschichte"
+  },
+  "services": {
+    "title": "Unsere Dienste",
+    "subtitle": "Professionelle Logistiklösungen für jeden Bedarf",
+    "land": {
+      "title": "Landtransport",
+      "desc": "Frachttransport auf Straße und Schiene"
+    },
+    "air": {
+      "title": "Lufttransport",
+      "desc": "Luftfrachtdienste für schnelle Lieferung"
+    },
+    "sea": {
+      "title": "Seetransport",
+      "desc": "Seeschifffahrt für großvolumige Fracht"
+    },
+    "warehouse": {
+      "title": "Lagerung",
+      "desc": "Dienstleistungen für Lagerung und Frachtverwaltung"
+    },
+    "customs": {
+      "title": "Zolldienste",
+      "desc": "Dokumentenabwicklung und Zollunterstützung"
+    },
+    "express": {
+      "title": "Expresslieferung",
+      "desc": "Dringende Lieferung innerhalb von 24 Stunden"
+    }
+  },
+  "pricing": {
+    "title": "Preise",
+    "subtitle": "Transparente und faire Preise",
+    "month": "pro Monat",
+    "year": "pro Jahr",
+    "basic": {
+      "title": "Basis",
+      "subtitle": "Für kleine Unternehmen"
+    },
+    "pro": {
+      "title": "Professionell",
+      "subtitle": "Für mittlere Unternehmen"
+    },
+    "enterprise": {
+      "title": "Unternehmen",
+      "subtitle": "Für große Unternehmen"
+    },
+    "choose": "Wählen",
+    "popular": "Beliebt",
+    "features": {
+      "shipments": "Sendungen",
+      "tracking": "Online-Verfolgung",
+      "support": "Support",
+      "warehouse": "Lagerung",
+      "manager": "Persönlicher Manager"
+    }
+  },
+  "contact": {
+    "title": "Kontaktieren Sie uns",
+    "subtitle": "Haben Sie Fragen? Wir helfen Ihnen gerne!",
+    "name": "Ihr Name",
+    "email": "E-Mail",
+    "phone": "Telefon",
+    "message": "Ihre Nachricht",
+    "submit": "Senden",
+    "success": "Ihre Nachricht wurde gesendet! Wir antworten Ihnen in Kürze.",
+    "address": "Adresse",
+    "phoneLabel": "Telefon",
+    "emailLabel": "E-Mail",
+    "workingHours": "Arbeitszeiten",
+    "workingHoursValue": "Mo - Sa: 09:00 - 18:00"
+  },
+  "faq": {
+    "title": "Häufig gestellte Fragen",
+    "subtitle": "Antworten auf die häufigsten Fragen",
+    "noAnswer": "Keine Antwort gefunden?",
+    "contactUs": "Kontaktieren Sie uns"
+  },
+  "profile": {
+    "title": "Mein Profil",
+    "personal": "Persönliche Daten",
+    "security": "Sicherheit",
+    "settings": "Einstellungen",
+    "name": "Name",
+    "email": "E-Mail",
+    "phone": "Telefon",
+    "address": "Adresse",
+    "changePassword": "Kennwort ändern",
+    "currentPassword": "Aktuelles Kennwort",
+    "newPassword": "Neues Kennwort",
+    "confirmPassword": "Kennwort bestätigen",
+    "save": "Speichern",
+    "saved": "Daten gespeichert",
+    "avatar": "Profilbild"
+  },
+  "myOrders": {
+    "title": "Meine Bestellungen",
+    "noOrders": "Noch keine Bestellungen",
+    "createFirst": "Geben Sie Ihre erste Bestellung auf",
+    "orderNumber": "Bestellnummer",
+    "date": "Datum",
+    "status": "Status",
+    "from": "Von",
+    "to": "Nach",
+    "price": "Preis",
+    "details": "Details"
+  },
+  "notifications": {
+    "title": "Benachrichtigungen",
+    "noNotifications": "Noch keine Benachrichtigungen",
+    "markAllRead": "Alle als gelesen markieren",
+    "new": "Neu"
+  },
+  "admin": {
+    "dashboard": "Dashboard",
+    "users": "Benutzer",
+    "orders": "Bestellungen",
+    "drivers": "Fahrer",
+    "statistics": "Statistiken",
+    "activityLog": "Aktivitätsprotokoll",
+    "settings": "Einstellungen",
+    "totalUsers": "Benutzer insgesamt",
+    "totalOrders": "Bestellungen insgesamt",
+    "revenue": "Umsatz",
+    "activeDrivers": "Aktive Fahrer"
+  },
+  "driver": {
+    "panel": "Fahrerpanel",
+    "availableOrders": "Verfügbare Bestellungen",
+    "myTrips": "Meine Fahrten",
+    "earnings": "Einnahmen",
+    "accept": "Akzeptieren",
+    "start": "Starten",
+    "complete": "Abschließen",
+    "online": "Online",
+    "offline": "Offline"
+  },
+  "errors": {
+    "404": "Seite nicht gefunden",
+    "404desc": "Die gesuchte Seite existiert nicht",
+    "500": "Serverfehler",
+    "500desc": "Auf dem Server ist ein Fehler aufgetreten. Bitte versuchen Sie es später noch einmal.",
+    "goHome": "Zurück zur Startseite"
+  }
+}

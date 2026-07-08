@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Package, Truck, MapPin, Shield, ArrowRight, CheckCircle2, Zap, ArrowLeft, User, Phone } from "lucide-react";
-import { useTheme } from "../context/ThemeContext";
 import Sticker from "../components/ui/Sticker";
 import FloatingElements from "../components/ui/FloatingElements";
 import api from "../utils/api";
@@ -12,8 +11,6 @@ const Order = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [trackingId, setTrackingId] = useState("");
   const [error, setError] = useState("");
-  const { isDarkMode } = useTheme();
-
   // ✅ Form ma'lumotlari state da — backend ga yuboriladi
   const [formData, setFormData] = useState({
     cargoType: 'Standart quti',
@@ -123,18 +120,16 @@ const Order = () => {
               <div key={s} className="flex items-center">
                 <motion.div
                   animate={{ scale: step === s ? 1.2 : 1 }}
-                  className={`w-14 h-14 rounded-2xl flex items-center justify-center font-black text-xl border-4 transition-all shadow-xl ${
-                    step >= s
+                  className={`w-14 h-14 rounded-2xl flex items-center justify-center font-black text-xl border-4 transition-all shadow-xl ${step >= s
                       ? "bg-primary-600 border-primary-100 dark:border-primary-900/50 text-white shadow-primary-500/20"
                       : "bg-white dark:bg-slate-800 border-slate-100 dark:border-slate-700 text-slate-300 dark:text-slate-600"
-                  }`}
+                    }`}
                 >
                   {s}
                 </motion.div>
                 {s < 3 && (
-                  <div className={`w-12 md:w-20 h-1.5 rounded-full mx-2 transition-colors duration-500 ${
-                    step > s ? "bg-primary-500" : "bg-slate-200 dark:bg-slate-800"
-                  }`} />
+                  <div className={`w-12 md:w-20 h-1.5 rounded-full mx-2 transition-colors duration-500 ${step > s ? "bg-primary-500" : "bg-slate-200 dark:bg-slate-800"
+                    }`} />
                 )}
               </div>
             ))}

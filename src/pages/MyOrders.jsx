@@ -10,11 +10,11 @@ import dynamicImport from "../utils/dynamicImport";
 import { formatDateSync as format } from "../utils/dateUtil";
 
 const STATUS_MAP = {
-  'Yangi':          { color: 'bg-blue-100 dark:bg-blue-500/10 text-blue-600 dark:text-blue-400',     icon: Package },
-  'Qabul qilindi':  { color: 'bg-yellow-100 dark:bg-yellow-500/10 text-yellow-600 dark:text-yellow-400', icon: CheckCircle2 },
-  "Yo'lda":         { color: 'bg-orange-100 dark:bg-orange-500/10 text-orange-600 dark:text-orange-400', icon: Truck },
-  'Yetkazildi':     { color: 'bg-green-100 dark:bg-green-500/10 text-green-600 dark:text-green-400',   icon: CheckCircle2 },
-  'Bekor qilindi':  { color: 'bg-rose-100 dark:bg-rose-500/10 text-rose-600 dark:text-rose-400',       icon: XCircle },
+  'Yangi': { color: 'bg-blue-100 dark:bg-blue-500/10 text-blue-600 dark:text-blue-400', icon: Package },
+  'Qabul qilindi': { color: 'bg-yellow-100 dark:bg-yellow-500/10 text-yellow-600 dark:text-yellow-400', icon: CheckCircle2 },
+  "Yo'lda": { color: 'bg-orange-100 dark:bg-orange-500/10 text-orange-600 dark:text-orange-400', icon: Truck },
+  'Yetkazildi': { color: 'bg-green-100 dark:bg-green-500/10 text-green-600 dark:text-green-400', icon: CheckCircle2 },
+  'Bekor qilindi': { color: 'bg-rose-100 dark:bg-rose-500/10 text-rose-600 dark:text-rose-400', icon: XCircle },
 };
 
 const StatusBadge = ({ status }) => {
@@ -38,7 +38,7 @@ const MyOrders = () => {
   const [search, setSearch] = useState("");
   const [statusFilter, setStatusFilter] = useState("all");
   const [page, setPage] = useState(1);
-  const [pagination, setPagination] = useState({ total: 0, pages: 1, limit: 10 });
+  const [pagination] = useState({ total: 0, pages: 1, limit: 10 });
 
   const fetchOrders = async () => {
     setLoading(true);
@@ -245,11 +245,10 @@ const MyOrders = () => {
               <button
                 key={p}
                 onClick={() => setPage(p)}
-                className={`w-12 h-12 rounded-2xl font-black text-sm transition-all ${
-                  p === page
+                className={`w-12 h-12 rounded-2xl font-black text-sm transition-all ${p === page
                     ? 'bg-primary-600 text-white shadow-lg shadow-primary-500/30'
                     : 'bg-white dark:bg-slate-900 text-slate-400 hover:text-primary-600 border border-slate-100 dark:border-slate-800'
-                }`}
+                  }`}
               >
                 {p}
               </button>

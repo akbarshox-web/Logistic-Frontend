@@ -1,9 +1,30 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import { useTranslation } from "react-i18next";
 import { Truck, Mail, Phone, MapPin, Send, ArrowUpRight, MessageCircle, Camera, Briefcase, Globe } from "lucide-react";
 import Sticker from "./ui/Sticker";
+import LanguageSwitcher from "./LanguageSwitcher";
 
 const Footer = () => {
+  const { t } = useTranslation();
+
+  const socials = [
+    { Icon: MessageCircle, label: t("footer.social.facebook") },
+    { Icon: Camera, label: t("footer.social.instagram") },
+    { Icon: Send, label: t("footer.social.twitter") },
+    { Icon: Briefcase, label: t("footer.social.linkedin") },
+  ];
+
+  const links = [
+    { label: t("footer.links.home"), path: "/" },
+    { label: t("footer.links.services"), path: "/xizmatlar" },
+    { label: t("footer.links.pricing"), path: "/narxlar" },
+    { label: t("footer.links.tracking"), path: "/kuzatish" },
+    { label: t("footer.links.about"), path: "/biz-haqimizda" },
+    { label: t("footer.links.faq"), path: "/savollar" },
+    { label: t("footer.links.contact"), path: "/boglanish" },
+  ];
+
   return (
     <footer className="bg-slate-950 text-slate-400 pt-32 pb-12 relative overflow-hidden">
       {/* Decorative background */}
@@ -23,15 +44,10 @@ const Footer = () => {
               </span>
             </Link>
             <p className="text-lg text-slate-500 font-medium leading-relaxed">
-              Biz dunyo bo'ylab yuk tashish va logistika yechimlarini taqdim etuvchi yetakchi kompaniyamiz. Sizning yukingiz - bizning mas'uliyatimiz.
+              {t("footer.tagline")}
             </p>
             <div className="flex items-center gap-4">
-              {[
-                { Icon: MessageCircle, label: "Facebook" },
-                { Icon: Camera, label: "Instagram" },
-                { Icon: Send, label: "Twitter" },
-                { Icon: Briefcase, label: "Linkedin" }
-              ].map(({ Icon, label }, idx) => (
+              {socials.map(({ Icon, label }, idx) => (
                 <a
                   key={idx}
                   href="#"
@@ -46,17 +62,9 @@ const Footer = () => {
 
           {/* Quick Links */}
           <div>
-            <h4 className="text-white font-black text-xl mb-8 tracking-tight">Kompaniya</h4>
+            <h4 className="text-white font-black text-xl mb-8 tracking-tight">{t("footer.company")}</h4>
             <ul className="space-y-5">
-              {[
-                { label: "Asosiy Sahifa", path: "/" },
-                { label: "Biznes Xizmatlar", path: "/xizmatlar" },
-                { label: "Tariflar", path: "/narxlar" },
-                { label: "Yuk Kuzatish", path: "/kuzatish" },
-                { label: "Biz haqimizda", path: "/biz-haqimizda" },
-                { label: "Savollar", path: "/savollar" },
-                { label: "Bog'lanish", path: "/boglanish" },
-              ].map((link, idx) => (
+              {links.map((link, idx) => (
                 <li key={idx}>
                   <Link to={link.path} className="text-lg font-bold hover:text-primary-500 transition-colors flex items-center gap-2 group">
                     {link.label}
@@ -69,34 +77,34 @@ const Footer = () => {
 
           {/* Contact Info */}
           <div>
-            <h4 className="text-white font-black text-xl mb-8 tracking-tight">Bog'lanish</h4>
+            <h4 className="text-white font-black text-xl mb-8 tracking-tight">{t("footer.contactTitle")}</h4>
             <ul className="space-y-6">
               <li className="flex items-start gap-4">
                 <Sticker icon={MapPin} color="primary" size={20} className="bg-slate-900 border-slate-800 shadow-none p-3" />
-                <span className="font-bold text-slate-300">Logistic Business Center, 108 Global Ave</span>
+                <span className="font-bold text-slate-300">{t("footer.address")}</span>
               </li>
               <li className="flex items-center gap-4">
                 <Sticker icon={Phone} color="primary" size={20} className="bg-slate-900 border-slate-800 shadow-none p-3" />
-                <span className="font-bold text-slate-300">+998 71 200 00 00</span>
+                <span className="font-bold text-slate-300">{t("footer.phone")}</span>
               </li>
               <li className="flex items-center gap-4">
                 <Sticker icon={Mail} color="primary" size={20} className="bg-slate-900 border-slate-800 shadow-none p-3" />
-                <span className="font-bold text-slate-300">info@logisticpro.uz</span>
+                <span className="font-bold text-slate-300">{t("footer.email")}</span>
               </li>
             </ul>
           </div>
 
           {/* Newsletter */}
           <div>
-            <h4 className="text-white font-black text-xl mb-8 tracking-tight">Yangiliklar</h4>
-            <p className="text-slate-500 font-medium mb-8">Eng so'nggi aksiyalar va yangiliklardan xabardor bo'ling.</p>
+            <h4 className="text-white font-black text-xl mb-8 tracking-tight">{t("footer.newsletter")}</h4>
+            <p className="text-slate-500 font-medium mb-8">{t("footer.newsletterDesc")}</p>
             <form className="relative group">
               <input
                 type="email"
-                placeholder="Email manzilingiz"
+                placeholder={t("footer.emailPlaceholder")}
                 className="w-full py-5 px-6 bg-slate-900 border border-slate-800 rounded-[1.5rem] focus:outline-none focus:border-primary-500 transition-all text-white font-bold"
               />
-              <button className="absolute right-2 top-1/2 -translate-y-1/2 p-3 bg-primary-600 rounded-xl text-white hover:bg-primary-700 transition-all shadow-lg shadow-primary-500/20">
+              <button type="button" className="absolute right-2 top-1/2 -translate-y-1/2 p-3 bg-primary-600 rounded-xl text-white hover:bg-primary-700 transition-all shadow-lg shadow-primary-500/20">
                 <Send size={20} />
               </button>
             </form>
@@ -104,10 +112,11 @@ const Footer = () => {
         </div>
 
         <div className="pt-12 border-t border-slate-900 flex flex-col md:flex-row justify-between items-center gap-6">
-          <p className="font-bold text-slate-600 italic">© {new Date().getFullYear()} LOGISTICPRO. Kelajak logistikasi.</p>
-          <div className="flex gap-10">
-            <a href="#" className="font-bold text-slate-600 hover:text-white transition-colors">Maxfiylik siyosati</a>
-            <a href="#" className="font-bold text-slate-600 hover:text-white transition-colors">Foydalanish shartlari</a>
+          <p className="font-bold text-slate-600 italic">© {new Date().getFullYear()} LOGISTICPRO. {t("footer.copyright")}</p>
+          <div className="flex flex-wrap items-center gap-6 md:gap-10">
+            <a href="#" className="font-bold text-slate-600 hover:text-white transition-colors">{t("footer.privacy")}</a>
+            <a href="#" className="font-bold text-slate-600 hover:text-white transition-colors">{t("footer.terms")}</a>
+            <LanguageSwitcher />
           </div>
         </div>
       </div>

@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { motion } from "framer-motion";
 import { LogIn, Mail, Lock, Eye, EyeOff, ArrowRight, ShieldCheck, Zap, AlertCircle } from "lucide-react";
 import { Link, useNavigate } from "react-router-dom";
+import { useTranslation } from "react-i18next";
 import { useAuth } from "../context/AuthContext";
 import Sticker from "../components/ui/Sticker";
 import FloatingElements from "../components/ui/FloatingElements";
@@ -26,6 +27,7 @@ const Login = () => {
 
   const { login, googleLogin } = useAuth();
   const navigate = useNavigate();
+  const { t } = useTranslation();
 
   const handleGoogleLogin = () => {
     if (!window.google || !GOOGLE_CLIENT_ID) {
@@ -87,18 +89,18 @@ const Login = () => {
             <motion.div initial={{ opacity: 0, scale: 0.8 }} animate={{ opacity: 1, scale: 1 }}
               className="inline-flex items-center gap-2 px-4 py-2 rounded-2xl bg-white dark:bg-slate-800 text-primary-600 dark:text-primary-400 text-sm font-black mb-8 border border-slate-100 dark:border-slate-800 shadow-xl uppercase tracking-widest">
               <ShieldCheck size={16} fill="currentColor" />
-              <span>Xavfsiz Kirish</span>
+              <span>{t("auth.login.title")}</span>
             </motion.div>
             <h1 className="text-6xl font-black text-slate-900 dark:text-white mb-8 tracking-tighter leading-tight">
-              Tizimga <span className="gradient-text">Xush Kelibsiz</span>
+              {t("auth.login.title")} <span className="gradient-text">LogisticPro</span>
             </h1>
             <p className="text-xl text-slate-500 dark:text-slate-400 font-medium leading-relaxed mb-10 max-w-md">
-              Hisobingizga kirib barcha imkoniyatlardan foydalaning.
+              {t("auth.login.subtitle")}
             </p>
             <div className="space-y-6">
               {[
-                { icon: Zap, text: "Tezkor va xavfsiz kirish", color: "orange" },
-                { icon: ShieldCheck, text: "Ma'lumotlar himoyalangan", color: "green" }
+                { icon: Zap, text: t("home.features.fast.title"), color: "orange" },
+                { icon: ShieldCheck, text: t("home.features.secure.title"), color: "green" }
               ].map((item, i) => (
                 <div key={i} className="flex items-center gap-4">
                   <Sticker icon={item.icon} color={item.color} size={20} className="shadow-none p-2.5" />
@@ -115,8 +117,8 @@ const Login = () => {
 
             <div className="flex flex-col items-center mb-10 text-center">
               <Sticker icon={LogIn} color="primary" size={32} className="mb-6" />
-              <h2 className="text-3xl font-black text-slate-900 dark:text-white tracking-tight">Kirish</h2>
-              <p className="text-slate-400 font-bold text-sm uppercase tracking-widest mt-2">Hisobingizga kiring</p>
+              <h2 className="text-3xl font-black text-slate-900 dark:text-white tracking-tight">{t("auth.login.title")}</h2>
+              <p className="text-slate-400 font-bold text-sm uppercase tracking-widest mt-2">{t("auth.login.subtitle")}</p>
             </div>
 
             {errorMsg && (
@@ -137,19 +139,19 @@ const Login = () => {
 
             <form onSubmit={handleSubmit} className="space-y-6">
               <div className="space-y-2">
-                <label className="text-xs font-black text-slate-400 uppercase tracking-widest ml-1">Email</label>
+                <label className="text-xs font-black text-slate-400 uppercase tracking-widest ml-1">{t("auth.login.email")}</label>
                 <div className="relative group">
                   <Mail className="absolute left-4 top-1/2 -translate-y-1/2 text-slate-400 group-focus-within:text-primary-600 transition-colors" size={20} />
                   <input type="email" required value={email} onChange={e => setEmail(e.target.value)}
-                    placeholder="Email manzilingiz"
+                    placeholder={t("auth.login.email")}
                     className="w-full pl-12 pr-6 py-4 bg-slate-50 dark:bg-slate-900 border border-slate-100 dark:border-slate-700 rounded-2xl focus:outline-none focus:ring-2 focus:ring-primary-500 transition-all font-bold dark:text-white" />
                 </div>
               </div>
 
               <div className="space-y-2">
                 <div className="flex justify-between items-center ml-1">
-                  <label className="text-xs font-black text-slate-400 uppercase tracking-widest">Parol</label>
-                  <button type="button" className="text-xs font-black text-primary-600 uppercase tracking-widest hover:underline">Unutdingizmi?</button>
+                  <label className="text-xs font-black text-slate-400 uppercase tracking-widest">{t("auth.login.password")}</label>
+                  <button type="button" className="text-xs font-black text-primary-600 uppercase tracking-widest hover:underline">{t("auth.login.forgot")}</button>
                 </div>
                 <div className="relative group">
                   <Lock className="absolute left-4 top-1/2 -translate-y-1/2 text-slate-400 group-focus-within:text-primary-600 transition-colors" size={20} />
@@ -165,7 +167,7 @@ const Login = () => {
 
               <div className="relative flex py-2 items-center">
                 <div className="flex-grow border-t border-slate-200 dark:border-slate-600"></div>
-                <span className="flex-shrink mx-4 text-slate-400 font-bold text-xs uppercase tracking-widest">yoki</span>
+                <span className="flex-shrink mx-4 text-slate-400 font-bold text-xs uppercase tracking-widest">{t("auth.login.orContinue")}</span>
                 <div className="flex-grow border-t border-slate-200 dark:border-slate-600"></div>
               </div>
 
@@ -183,7 +185,7 @@ const Login = () => {
                       <path d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z" fill="#FBBC05"/>
                       <path d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z" fill="#EA4335"/>
                     </svg>
-                    Google orqali kirish
+                    {t("auth.login.googleLogin")}
                   </>
                 )}
               </button>
@@ -194,15 +196,15 @@ const Login = () => {
                     <Zap size={24} fill="currentColor" />
                   </motion.div>
                 ) : (
-                  <> Tizimga kirish <ArrowRight size={24} strokeWidth={3} /> </>
+                  <> {t("auth.login.submit")} <ArrowRight size={24} strokeWidth={3} /> </>
                 )}
               </button>
             </form>
 
             <div className="mt-10 text-center">
               <p className="text-slate-400 font-bold text-sm">
-                Hisobingiz yo'qmi?{" "}
-                <Link to="/register" className="text-primary-600 hover:underline">Ro'yxatdan o'ting</Link>
+                {t("auth.login.noAccount")}{" "}
+                <Link to="/register" className="text-primary-600 hover:underline">{t("auth.login.register")}</Link>
               </p>
             </div>
           </motion.div>

@@ -1,0 +1,354 @@
+{
+  "common": {
+    "loading": "Yuklanmoqda...",
+    "save": "Saqlash",
+    "cancel": "Bekor qilish",
+    "edit": "Tahrirlash",
+    "delete": "O'chirish",
+    "search": "Qidirish",
+    "send": "Yuborish",
+    "submit": "Jo'natish",
+    "back": "Orqaga",
+    "next": "Keyingi",
+    "previous": "Oldingi",
+    "yes": "Ha",
+    "no": "Yo'q",
+    "all": "Hammasi",
+    "more": "Batafsil",
+    "close": "Yopish",
+    "open": "Ochish",
+    "error": "Xatolik",
+    "success": "Muvaffaqiyat",
+    "warning": "Ogohlantirish",
+    "info": "Ma'lumot",
+    "language": "Til",
+    "darkMode": "Qorong'i rejim",
+    "lightMode": "Yorug' rejim",
+    "viewAll": "Barchasini ko'rish",
+    "seeMore": "Ko'proq ko'rish",
+    "from": "dan",
+    "to": "gacha"
+  },
+  "nav": {
+    "home": "Asosiy",
+    "services": "Xizmatlar",
+    "pricing": "Narxlar",
+    "about": "Biz haqimizda",
+    "faq": "Savollar",
+    "contact": "Bog'lanish",
+    "order": "Buyurtma",
+    "tracking": "Kuzatish",
+    "admin": "Admin",
+    "login": "Kirish",
+    "logout": "Chiqish",
+    "register": "Ro'yxatdan o'tish",
+    "profile": "Profil",
+    "myOrders": "Buyurtmalarim",
+    "notifications": "Bildirishnomalar",
+    "start": "Boshlash",
+    "placeOrder": "Buyurtma berish"
+  },
+  "footer": {
+    "tagline": "Biz dunyo bo'ylab yuk tashish va logistika yechimlarini taqdim etuvchi yetakchi kompaniyamiz. Sizning yukingiz - bizning mas'uliyatimiz.",
+    "company": "Kompaniya",
+    "contactTitle": "Bog'lanish",
+    "newsletter": "Yangiliklar",
+    "newsletterDesc": "Eng so'nggi aksiyalar va yangiliklardan xabardor bo'ling.",
+    "emailPlaceholder": "Email manzilingiz",
+    "copyright": "Kelajak logistikasi.",
+    "privacy": "Maxfiylik siyosati",
+    "terms": "Foydalanish shartlari",
+    "address": "Logistic Business Center, 108 Global Ave",
+    "phone": "+998 71 200 00 00",
+    "email": "info@logisticpro.uz",
+    "social": {
+      "facebook": "Facebook",
+      "instagram": "Instagram",
+      "twitter": "Twitter",
+      "linkedin": "Linkedin"
+    },
+    "links": {
+      "home": "Asosiy Sahifa",
+      "services": "Biznes Xizmatlar",
+      "pricing": "Tariflar",
+      "tracking": "Yuk Kuzatish",
+      "about": "Biz haqimizda",
+      "faq": "Savollar",
+      "contact": "Bog'lanish"
+    }
+  },
+  "home": {
+    "hero": {
+      "badge": "YANGI AVLOG TEXNOLOGIYASI",
+      "title": "Yukingizni",
+      "titleHighlight": "tez va ishonchli",
+      "titleEnd": "yetkazib beramiz",
+      "subtitle": "Zamonaviy logistika yechimlari orqali biznesingizni global miqyosga olib chiqing. Tezkor, xavfsiz va shaffof xizmat.",
+      "cta": "Buyurtma berish",
+      "ctaSecondary": "Batafsil ma'lumot"
+    },
+    "stats": {
+      "deliveries": "Muvaffaqiyatli yetkazish",
+      "countries": "Mamlakatlar",
+      "clients": "Mamnun mijozlar",
+      "experience": "Yillik tajriba"
+    },
+    "features": {
+      "title": "Nega aynan biz?",
+      "subtitle": "Sizning logistika ehtiyojlaringiz uchun eng yaxshi yechimlarni taqdim etamiz",
+      "fast": {
+        "title": "Tezkor yetkazish",
+        "desc": "Eng qisqa vaqt ichida yukingizni manzilga yetkazib beramiz"
+      },
+      "secure": {
+        "title": "Xavfsizlik",
+        "desc": "Yukingiz to'liq kafolatlangan holda himoyalanadi"
+      },
+      "tracking": {
+        "title": "Onlayn kuzatish",
+        "desc": "Yukingiz holatini istalgan vaqtda kuzatib boring"
+      },
+      "support": {
+        "title": "24/7 Qo'llab-quvvatlash",
+        "desc": "Doim aloqadamiz, har qanday savolga javob beramiz"
+      }
+    }
+  },
+  "auth": {
+    "login": {
+      "title": "Tizimga kirish",
+      "subtitle": "Hisobingizga kiring va xizmatlardan foydalaning",
+      "email": "Email",
+      "password": "Parol",
+      "remember": "Eslab qolish",
+      "submit": "Kirish",
+      "noAccount": "Hisobingiz yo'qmi?",
+      "register": "Ro'yxatdan o'tish",
+      "forgot": "Parolni unutdingizmi?",
+      "orContinue": "yoki",
+      "googleLogin": "Google orqali kirish"
+    },
+    "register": {
+      "title": "Ro'yxatdan o'tish",
+      "subtitle": "Yangi hisob yarating va logistika xizmatlaridan foydalaning",
+      "name": "Ism",
+      "email": "Email",
+      "phone": "Telefon raqami",
+      "password": "Parol",
+      "confirmPassword": "Parolni tasdiqlang",
+      "submit": "Ro'yxatdan o'tish",
+      "haveAccount": "Hisobingiz bormi?",
+      "login": "Kirish",
+      "agree": "Men foydalanish shartlariga roziman",
+      "selectRole": "Rolni tanlang",
+      "client": "Mijoz",
+      "driver": "Haydovchi"
+    },
+    "verify": {
+      "title": "Emailni tasdiqlash",
+      "subtitle": "Emailingizga yuborilgan kodni kiriting",
+      "code": "Tasdiqlash kodi",
+      "submit": "Tasdiqlash",
+      "resend": "Kodni qayta yuborish",
+      "noCode": "Kod kelmadimi?"
+    }
+  },
+  "order": {
+    "title": "Buyurtma berish",
+    "subtitle": "Yukingiz ma'lumotlarini kiriting va biz siz bilan bog'lanamiz",
+    "fromAddress": "Qayerdan",
+    "toAddress": "Qayerga",
+    "cargoType": "Yuk turi",
+    "weight": "Og'irlik (kg)",
+    "volume": "Hajm (m³)",
+    "date": "Yetkazish sanasi",
+    "description": "Qo'shimcha ma'lumot",
+    "name": "Ismingiz",
+    "phone": "Telefon raqami",
+    "submit": "Buyurtma berish",
+    "success": "Buyurtmangiz qabul qilindi! Tez orada bog'lanamiz.",
+    "calculate": "Narxni hisoblash",
+    "estimatedPrice": "Taxminiy narx",
+    "selectType": "Yuk turini tanlang",
+    "types": {
+      "documents": "Hujjatlar",
+      "parcel": "Posilka",
+      "furniture": "Mebel",
+      "fragile": "Mo'rt buyumlar",
+      "vehicle": "Avtotransport",
+      "other": "Boshqa"
+    }
+  },
+  "tracking": {
+    "title": "Yukni kuzatish",
+    "subtitle": "Buyurtma raqamingizni kiriting va yukingiz holatini kuzating",
+    "placeholder": "Buyurtma raqamini kiriting",
+    "track": "Kuzatish",
+    "status": "Holat",
+    "estimatedDelivery": "Taxminiy yetkazish",
+    "currentLocation": "Joriy joylashuv",
+    "history": "Tarix",
+    "notFound": "Buyurtma topilmadi. Raqamni tekshiring.",
+    "statuses": {
+      "created": "Yaratilgan",
+      "accepted": "Qabul qilindi",
+      "picked_up": "Yuklandi",
+      "in_transit": "Yo'lda",
+      "delivered": "Yetkazildi",
+      "cancelled": "Bekor qilindi"
+    }
+  },
+  "about": {
+    "title": "Biz haqimizda",
+    "subtitle": "Logistika sohasida 10+ yillik tajribaga egamiz",
+    "mission": "Bizning maqsadimiz",
+    "missionText": "Mijozlarimizga eng tezkor, ishonchli va zamonaviy logistika xizmatlarini ko'rsatish.",
+    "vision": "Bizning ko'rishimiz",
+    "visionText": "Markaziy Osiyoda eng ilg'or logistika kompaniyasiga aylanish.",
+    "values": "Bizning qadriyatlarimiz",
+    "team": "Bizning jamoa",
+    "history": "Tarix"
+  },
+  "services": {
+    "title": "Bizning xizmatlar",
+    "subtitle": "Har bir ehtiyoj uchun professional logistika yechimlari",
+    "land": {
+      "title": "Quruqlik transporti",
+      "desc": "Avtomobil va temir yo'l orqali yuk tashish"
+    },
+    "air": {
+      "title": "Havo transporti",
+      "desc": "Tezkor yetkazish uchun havo transporti xizmatlari"
+    },
+    "sea": {
+      "title": "Dengiz transporti",
+      "desc": "Katta hajmli yuklar uchun dengiz orqali tashish"
+    },
+    "warehouse": {
+      "title": "Omborxona",
+      "desc": "Yuklarni saqlash va boshqarish xizmatlari"
+    },
+    "customs": {
+      "title": "Bojxona xizmatlari",
+      "desc": "Hujjatlar rasmiylashtirish va bojxona yordami"
+    },
+    "express": {
+      "title": "Ekspress yetkazish",
+      "desc": "24 soat ichida tezkor yetkazish xizmati"
+    }
+  },
+  "pricing": {
+    "title": "Narxlar",
+    "subtitle": "Shaffof va adolatli narxlar",
+    "month": "oyiga",
+    "year": "yiliga",
+    "basic": {
+      "title": "Boshlang'ich",
+      "subtitle": "Kichik biznes uchun"
+    },
+    "pro": {
+      "title": "Professional",
+      "subtitle": "O'rta biznes uchun"
+    },
+    "enterprise": {
+      "title": "Korporativ",
+      "subtitle": "Yirik kompaniyalar uchun"
+    },
+    "choose": "Tanlash",
+    "popular": "Mashhur",
+    "features": {
+      "shipments": "ta yuk tashish",
+      "tracking": "Onlayn kuzatish",
+      "support": "Qo'llab-quvvatlash",
+      "warehouse": "Omborxona",
+      "manager": "Shaxsiy menejer"
+    }
+  },
+  "contact": {
+    "title": "Biz bilan bog'laning",
+    "subtitle": "Savollaringiz bormi? Biz yordam beramiz!",
+    "name": "Ismingiz",
+    "email": "Email",
+    "phone": "Telefon",
+    "message": "Xabaringiz",
+    "submit": "Yuborish",
+    "success": "Xabaringiz yuborildi! Tez orada javob beramiz.",
+    "address": "Manzil",
+    "phoneLabel": "Telefon",
+    "emailLabel": "Email",
+    "workingHours": "Ish vaqti",
+    "workingHoursValue": "Dush - Shan: 09:00 - 18:00"
+  },
+  "faq": {
+    "title": "Ko'p beriladigan savollar",
+    "subtitle": "Eng ko'p so'raladigan savollarga javoblar",
+    "noAnswer": "Javob topmadingizmi?",
+    "contactUs": "Biz bilan bog'laning"
+  },
+  "profile": {
+    "title": "Mening profilim",
+    "personal": "Shaxsiy ma'lumotlar",
+    "security": "Xavfsizlik",
+    "settings": "Sozlamalar",
+    "name": "Ism",
+    "email": "Email",
+    "phone": "Telefon",
+    "address": "Manzil",
+    "changePassword": "Parolni o'zgartirish",
+    "currentPassword": "Joriy parol",
+    "newPassword": "Yangi parol",
+    "confirmPassword": "Parolni tasdiqlang",
+    "save": "Saqlash",
+    "saved": "Ma'lumotlar saqlandi",
+    "avatar": "Profil rasmi"
+  },
+  "myOrders": {
+    "title": "Buyurtmalarim",
+    "noOrders": "Hozircha buyurtmalar yo'q",
+    "createFirst": "Birinchi buyurtmani bering",
+    "orderNumber": "Buyurtma raqami",
+    "date": "Sana",
+    "status": "Holat",
+    "from": "Qayerdan",
+    "to": "Qayerga",
+    "price": "Narx",
+    "details": "Batafsil"
+  },
+  "notifications": {
+    "title": "Bildirishnomalar",
+    "noNotifications": "Hozircha bildirishnomalar yo'q",
+    "markAllRead": "Hammasini o'qilgan deb belgilash",
+    "new": "Yangi"
+  },
+  "admin": {
+    "dashboard": "Boshqaruv paneli",
+    "users": "Foydalanuvchilar",
+    "orders": "Buyurtmalar",
+    "drivers": "Haydovchilar",
+    "statistics": "Statistika",
+    "activityLog": "Faollik jurnali",
+    "settings": "Sozlamalar",
+    "totalUsers": "Jami foydalanuvchilar",
+    "totalOrders": "Jami buyurtmalar",
+    "revenue": "Daromad",
+    "activeDrivers": "Faol haydovchilar"
+  },
+  "driver": {
+    "panel": "Haydovchi paneli",
+    "availableOrders": "Mavjud buyurtmalar",
+    "myTrips": "Mening safarlarim",
+    "earnings": "Daromadlar",
+    "accept": "Qabul qilish",
+    "start": "Boshlash",
+    "complete": "Tugatish",
+    "online": "Onlayn",
+    "offline": "Oflayn"
+  },
+  "errors": {
+    "404": "Sahifa topilmadi",
+    "404desc": "Siz qidirayotgan sahifa mavjud emas",
+    "500": "Server xatosi",
+    "500desc": "Serverda xatolik yuz berdi. Iltimos, keyinroq urinib ko'ring.",
+    "goHome": "Bosh sahifaga qaytish"
+  }
+}

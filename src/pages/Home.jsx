@@ -2,16 +2,59 @@ import React, { useRef, useState, useEffect } from "react";
 import { motion, useScroll, useTransform } from "framer-motion";
 import { Truck, Shield, Clock, Globe, ArrowRight, Package, MapPin, Phone, Star, Zap, Award, CheckCircle, Users, BarChart3, TrendingUp, MessageSquare, Sparkles } from "lucide-react";
 import { Link } from "react-router-dom";
+import { useTranslation } from "react-i18next";
 import Sticker from "../components/ui/Sticker";
 import ThreeDCard from "../components/ui/ThreeDCard";
 import FloatingElements from "../components/ui/FloatingElements";
 import { usePartners } from "../context/PartnerContext";
+import { useAuth } from "../context/AuthContext";
 import ParallaxSection, { ParallaxBackground } from "../components/ui/ParallaxSection";
 import api from "../utils/api";
 import { formatDateSync as format } from "../utils/dateUtil";
 
+const getPartnerInitials = (name = "Partner") =>
+  name
+    .split(" ")
+    .slice(0, 2)
+    .map((word) => word[0] || "")
+    .join("")
+    .toUpperCase() || "P";
+
+const normalizePartnerName = (name = "") => name.toLowerCase().trim();
+const isHiddenPartner = (name = "") => ["wedcjksdccsd"].includes(normalizePartnerName(name));
+
+const trustedPartners = [
+  { name: "DHL", logo: "https://upload.wikimedia.org/wikipedia/commons/a/ad/DHL_Logo.svg" },
+  { name: "UPS", logo: "https://upload.wikimedia.org/wikipedia/commons/3/3e/UPS_Logo.svg" },
+  { name: "FedEx", logo: "https://upload.wikimedia.org/wikipedia/commons/3/3b/FedEx_Logo.svg" },
+  { name: "Maersk", logo: "https://upload.wikimedia.org/wikipedia/commons/3/3d/MAERSK_logotype.svg" },
+  { name: "ASUS", logo: "https://upload.wikimedia.org/wikipedia/commons/2/2e/ASUS_Logo.svg" },
+  { name: "Acer", logo: "https://upload.wikimedia.org/wikipedia/commons/0/0f/Acer_2011.svg" },
+  { name: "HP", logo: "https://upload.wikimedia.org/wikipedia/commons/2/2b/HP_logo_2012.svg" },
+  { name: "Apple", logo: "https://upload.wikimedia.org/wikipedia/commons/f/fa/Apple_logo_black.svg" },
+  { name: "Samsung", logo: "https://upload.wikimedia.org/wikipedia/commons/2/24/Samsung_Logo.svg" },
+  { name: "Microsoft", logo: "https://upload.wikimedia.org/wikipedia/commons/4/44/Microsoft_logo.svg" },
+  { name: "Google", logo: "https://upload.wikimedia.org/wikipedia/commons/2/2f/Google_2015_logo.svg" },
+  { name: "Amazon", logo: "https://upload.wikimedia.org/wikipedia/commons/a/a9/Amazon_logo.svg" },
+];
+
 const Home = () => {
+  const { t } = useTranslation();
   const { partners } = usePartners();
+  const { user } = useAuth();
+  const visiblePartners = [
+    ...trustedPartners,
+    ...partners
+      .filter((partner) => !isHiddenPartner(partner?.name))
+      .map((partner) => ({
+        name: partner.name || "Trusted Partner",
+        logo: partner.logo || partner.image || "",
+        website: partner.website || "#",
+      })),
+  ].filter(
+    (partner, index, list) =>
+      list.findIndex((item) => normalizePartnerName(item.name) === normalizePartnerName(partner.name)) === index
+  );
   const [stats, setStats] = useState(null);
   const [reviews, setReviews] = useState([]);
   const [settings, setSettings] = useState(null);
@@ -57,24 +100,34 @@ const Home = () => {
   useEffect(() => {
     const load = async () => {
       try {
-        const [{ data: dash }, { data: rv }, { data: st }] = await Promise.all([
-          api.get('/orders/stats/dashboard').catch(() => ({ data: null })),
+        const canLoadDashboardStats = user?.role === "admin" || user?.role === "superadmin";
+        const requests = [
           api.get('/reviews').catch(() => ({ data: [] })),
           api.get('/settings').catch(() => ({ data: null })),
-        ]);
+        ];
+
+        if (canLoadDashboardStats) {
+          requests.unshift(api.get('/orders/stats/dashboard').catch(() => ({ data: null })));
+        }
+
+        const responses = await Promise.all(requests);
+        const dash = canLoadDashboardStats ? responses[0]?.data ?? null : null;
+        const rv = responses[canLoadDashboardStats ? 1 : 0]?.data ?? [];
+        const st = responses[canLoadDashboardStats ? 2 : 1]?.data ?? null;
+
         setStats(dash);
         setReviews(Array.isArray(rv) ? rv : []);
         setSettings(st || null);
-      } catch (e) { /* ignore */ }
+      } catch { /* ignore */ }
     };
     load();
-  }, []);
+  }, [user?.role]);
 
   const statCards = [
-    { icon: Package, val: stats?.totals?.orders?.toLocaleString() || '15K+', label: 'Buyurtmalar', color: 'blue' },
-    { icon: Users,   val: stats?.totals?.clients?.toLocaleString() || '12K+', label: 'Mijozlar',    color: 'purple' },
-    { icon: Truck,   val: stats?.totals?.drivers?.toLocaleString() || '250+', label: 'Haydovchilar', color: 'orange' },
-    { icon: CheckCircle, val: '99.9%', label: 'Muvaffaqiyat', color: 'green' },
+    { icon: Package, val: stats?.totals?.orders?.toLocaleString() || '15K+', label: t("home.stats.deliveries"), color: 'blue' },
+    { icon: Users, val: stats?.totals?.clients?.toLocaleString() || '12K+', label: t("home.stats.clients"), color: 'purple' },
+    { icon: Truck, val: stats?.totals?.drivers?.toLocaleString() || '250+', label: t("home.stats.experience") + ' haydovchi', color: 'orange' },
+    { icon: CheckCircle, val: '99.9%', label: t("home.features.secure.title"), color: 'green' },
   ];
 
   const services = [
@@ -108,33 +161,32 @@ const Home = () => {
               animate={{ opacity: 1, x: 0 }}
               transition={{ duration: 0.8, ease: "easeOut" }}
             >
-              <motion.div 
+              <motion.div
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 0.2 }}
                 className="inline-flex items-center gap-2 px-4 py-2 rounded-2xl bg-white/50 dark:bg-slate-800/50 backdrop-blur-md text-primary-700 dark:text-primary-400 text-sm font-bold mb-8 border border-white/50 dark:border-slate-700/50 shadow-xl shadow-primary-500/5"
               >
                 <Sticker icon={Shield} color="primary" size={14} className="p-1.5 shadow-none" />
-                <span>Ishonchli va Tezkor Logistika</span>
+                <span>{t("home.hero.badge")}</span>
               </motion.div>
-              
+
               <h1 className="text-6xl md:text-8xl font-black leading-[1.1] text-slate-900 dark:text-white mb-8 tracking-tight">
-                Kelajak <span className="gradient-text">Yetkazib</span> Berish Tizimi
+                {t("home.hero.title")} <span className="gradient-text">{t("home.hero.titleHighlight")}</span> {t("home.hero.titleEnd")}
               </h1>
-              
+
               <p className="text-xl text-slate-600 dark:text-slate-400 mb-10 max-w-lg leading-relaxed font-medium">
-                Biz yuklaringizni nafaqat manzilingizga, balki kelajakka yetkazamiz. 
-                3D kuzatuv va aqlli logistika bilan xizmatingizdamiz.
+                {t("home.hero.subtitle")}
               </p>
-              
+
               <div className="flex flex-col sm:flex-row gap-5">
                 <Link to="/buyurtma" className="btn-primary group overflow-hidden relative">
-                  <span className="relative z-10">Hoziroq boshlang</span>
+                  <span className="relative z-10">{t("home.hero.cta")}</span>
                   <ArrowRight size={22} className="relative z-10 group-hover:translate-x-2 transition-transform duration-300" />
-                  <div className="absolute inset-0 bg-gradient-to-r from-blue-600 to-indigo-600 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+                  <div className="absolute inset-0 bg-linear-to-r from-blue-600 to-indigo-600 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
                 </Link>
                 <Link to="/kuzatish" className="btn-secondary group dark:bg-slate-800 dark:text-white dark:border-slate-700">
-                  <span>Yukni kuzatish</span>
+                  <span>{t("nav.tracking")}</span>
                   <MapPin size={22} className="group-hover:text-primary-600 transition-colors" />
                 </Link>
               </div>
@@ -142,9 +194,9 @@ const Home = () => {
               {/* Stats - hero */}
               <div className="grid grid-cols-3 gap-10 mt-16 border-t border-slate-200 dark:border-slate-800 pt-10">
                 {[
-                  { label: "Mijozlar", val: stats?.totals?.clients ? `${stats.totals.clients}+` : "15k+" },
-                  { label: "Buyurtmalar", val: stats?.totals?.orders ? `${stats.totals.orders}+` : "50k+" },
-                  { label: "Muvaffaqiyat", val: "99.9%" }
+                  { label: t("home.stats.clients"), val: stats?.totals?.clients ? `${stats.totals.clients}+` : "15k+" },
+                  { label: t("home.stats.deliveries"), val: stats?.totals?.orders ? `${stats.totals.orders}+` : "50k+" },
+                  { label: t("home.stats.experience"), val: "99.9%" }
                 ].map((stat, i) => (
                   <motion.div
                     key={i}
@@ -160,15 +212,15 @@ const Home = () => {
             </motion.div>
 
             <motion.div style={{ y: yCard }} className="relative perspective-1000">
-              <ThreeDCard className="w-full aspect-square max-w-[550px] mx-auto">
-                <div className="w-full h-full bg-gradient-to-br from-primary-600 to-indigo-700 rounded-[3rem] p-1 shadow-2xl overflow-hidden relative group">
+              <ThreeDCard className="w-full aspect-square max-w-137.5 mx-auto">
+                <div className="w-full h-full bg-linear-to-br from-primary-600 to-indigo-700 rounded-4xl p-1 shadow-2xl overflow-hidden relative group">
                   {/* Decorative background in card */}
                   <div className="absolute top-0 left-0 w-full h-full opacity-20 bg-[radial-gradient(circle_at_50%_50%,rgba(255,255,255,0.4),transparent)]" />
                   <div className="absolute -bottom-20 -right-20 w-80 h-80 bg-white/10 rounded-full blur-3xl group-hover:bg-white/20 transition-colors duration-500" />
-                  
+
                   <div className="w-full h-full bg-white/5 backdrop-blur-sm rounded-[2.8rem] flex flex-col items-center justify-center relative overflow-hidden">
                     <motion.div
-                      animate={{ 
+                      animate={{
                         y: [0, -20, 0],
                         rotateY: [0, 10, 0, -10, 0]
                       }}
@@ -177,7 +229,7 @@ const Home = () => {
                     >
                       <Package size={200} className="text-white drop-shadow-[0_20px_50px_rgba(0,0,0,0.3)]" strokeWidth={1} />
                     </motion.div>
-                    
+
                     <div className="absolute bottom-12 left-0 w-full text-center px-8">
                       <div className="text-white/60 font-bold tracking-widest uppercase text-xs mb-2">Yuk holati</div>
                       <div className="text-white text-2xl font-black italic">XAVFSIZLIK KAFOLATLANGAN</div>
@@ -189,7 +241,7 @@ const Home = () => {
                 <motion.div
                   animate={{ y: [0, -15, 0], rotate: [0, 5, 0] }}
                   transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
-                  className="absolute -top-10 -right-6 glass p-6 rounded-[2rem] z-20 shadow-2xl border-white/50"
+                  className="absolute -top-10 -right-6 glass p-6 rounded-4xl z-20 shadow-2xl border-white/50"
                 >
                   <div className="flex items-center gap-4">
                     <Sticker icon={Zap} color="orange" size={24} />
@@ -203,7 +255,7 @@ const Home = () => {
                 <motion.div
                   animate={{ y: [0, 15, 0], rotate: [0, -5, 0] }}
                   transition={{ duration: 5, repeat: Infinity, ease: "easeInOut", delay: 1 }}
-                  className="absolute -bottom-8 -left-8 glass-dark p-6 rounded-[2rem] z-20 shadow-2xl border-slate-700/50"
+                  className="absolute -bottom-8 -left-8 glass-dark p-6 rounded-4xl z-20 shadow-2xl border-slate-700/50"
                 >
                   <div className="flex items-center gap-4">
                     <Sticker icon={Globe} color="blue" size={24} />
@@ -257,58 +309,58 @@ const Home = () => {
               viewport={{ once: true, margin: "-100px" }}
               className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8"
             >
-            {[
-              {
-                icon: Truck,
-                color: "primary",
-                title: "Tezkor Yetkazish",
-                desc: "Eng so'nggi algoritmlar yordamida eng qisqa yo'llar."
-              },
-              {
-                icon: Shield,
-                color: "green",
-                title: "To'liq Sug'urta",
-                desc: "Yukingiz qiymati 100% kafolatlangan va himoyalangan."
-              },
-              {
-                icon: Award,
-                color: "amber",
-                title: "Top Xizmat",
-                desc: "Xalqaro logistika mukofotlari sovrindori."
-              },
-              {
-                icon: Phone,
-                color: "rose",
-                title: "Jonli Aloqa",
-                desc: "Botlar emas, haqiqiy mutaxassislar yordam beradi."
-              }
-            ].map((feature, idx) => (
-              <motion.div
-                key={idx}
-                variants={itemVariants}
-                className="group relative"
-                whileHover={{ scale: 1.05 }}
-                transition={{ type: "spring", stiffness: 300 }}
-              >
-                <div className="p-10 rounded-[2.5rem] bg-slate-50 dark:bg-slate-800/50 border border-slate-100 dark:border-slate-800 hover:bg-white dark:hover:bg-slate-800 hover:shadow-2xl hover:shadow-primary-500/10 transition-all duration-500 hover:-translate-y-4 h-full flex flex-col items-center text-center">
-                  <div className="mb-8">
-                    <Sticker icon={feature.icon} color={feature.color} size={32} />
+              {[
+                {
+                  icon: Truck,
+                  color: "primary",
+                  title: "Tezkor Yetkazish",
+                  desc: "Eng so'nggi algoritmlar yordamida eng qisqa yo'llar."
+                },
+                {
+                  icon: Shield,
+                  color: "green",
+                  title: "To'liq Sug'urta",
+                  desc: "Yukingiz qiymati 100% kafolatlangan va himoyalangan."
+                },
+                {
+                  icon: Award,
+                  color: "amber",
+                  title: "Top Xizmat",
+                  desc: "Xalqaro logistika mukofotlari sovrindori."
+                },
+                {
+                  icon: Phone,
+                  color: "rose",
+                  title: "Jonli Aloqa",
+                  desc: "Botlar emas, haqiqiy mutaxassislar yordam beradi."
+                }
+              ].map((feature, idx) => (
+                <motion.div
+                  key={idx}
+                  variants={itemVariants}
+                  className="group relative"
+                  whileHover={{ scale: 1.05 }}
+                  transition={{ type: "spring", stiffness: 300 }}
+                >
+                  <div className="p-10 rounded-[2.5rem] bg-slate-50 dark:bg-slate-800/50 border border-slate-100 dark:border-slate-800 hover:bg-white dark:hover:bg-slate-800 hover:shadow-2xl hover:shadow-primary-500/10 transition-all duration-500 hover:-translate-y-4 h-full flex flex-col items-center text-center">
+                    <div className="mb-8">
+                      <Sticker icon={feature.icon} color={feature.color} size={32} />
+                    </div>
+                    <h3 className="text-2xl font-black mb-4 text-slate-900 dark:text-white tracking-tight">{feature.title}</h3>
+                    <p className="text-slate-500 dark:text-slate-400 leading-relaxed font-medium">{feature.desc}</p>
+
+                    {/* Decorative dot */}
+                    <div className="mt-8 w-2 h-2 rounded-full bg-slate-200 dark:bg-slate-700 group-hover:bg-primary-500 transition-colors duration-300" />
                   </div>
-                  <h3 className="text-2xl font-black mb-4 text-slate-900 dark:text-white tracking-tight">{feature.title}</h3>
-                  <p className="text-slate-500 dark:text-slate-400 leading-relaxed font-medium">{feature.desc}</p>
-                  
-                  {/* Decorative dot */}
-                  <div className="mt-8 w-2 h-2 rounded-full bg-slate-200 dark:bg-slate-700 group-hover:bg-primary-500 transition-colors duration-300" />
-                </div>
-              </motion.div>
-            ))}
-          </motion.div>
-        </div>
+                </motion.div>
+              ))}
+            </motion.div>
+          </div>
         </motion.div>
       </section>
 
       {/* Partners Section */}
-      {partners.length > 0 && (
+      {visiblePartners.length > 0 && (
         <section className="py-24 bg-slate-50 dark:bg-slate-900/50 relative overflow-hidden">
           <div className="container mx-auto px-4 md:px-6 relative z-10">
             <div className="text-center mb-16">
@@ -323,25 +375,41 @@ const Home = () => {
               <h2 className="text-4xl md:text-5xl font-black text-slate-900 dark:text-white tracking-tighter">Global <span className="gradient-text">Hamkorlik</span></h2>
             </div>
 
-            <div className="flex flex-wrap justify-center gap-8 md:gap-16">
-              {partners.map((partner, idx) => (
+            <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 xl:grid-cols-6 gap-4 md:gap-6">
+              {visiblePartners.map((partner, idx) => (
                 <motion.a
-                  key={partner._id}
+                  key={partner.name}
                   href={partner.website || "#"}
-                  target="_blank"
-                  rel="noreferrer"
+                  target={partner.website ? "_blank" : undefined}
+                  rel={partner.website ? "noreferrer" : undefined}
                   initial={{ opacity: 0, y: 30 }}
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true }}
-                  transition={{ delay: idx * 0.1, duration: 0.6 }}
-                  whileHover={{ y: -5, scale: 1.05 }}
-                  className="w-32 md:w-48 h-20 flex items-center justify-center p-6 bg-white dark:bg-slate-800 rounded-2xl shadow-xl shadow-slate-200/50 dark:shadow-none border border-white dark:border-slate-700 hover:border-primary-500/30 transition-all duration-300"
+                  transition={{ delay: idx * 0.08, duration: 0.5 }}
+                  whileHover={{ y: -6, scale: 1.03 }}
+                  className="group relative overflow-hidden rounded-3xl border border-slate-200/70 bg-white p-4 shadow-[0_15px_45px_-20px_rgba(15,23,42,0.25)] transition-all duration-300 hover:border-primary-400/50 hover:shadow-[0_20px_55px_-20px_rgba(59,130,246,0.35)] dark:border-slate-700 dark:bg-slate-800"
                 >
-                  <img
-                    src={partner.logo}
-                    alt={partner.name}
-                    className="max-h-full max-w-full object-contain grayscale hover:grayscale-0 transition-all duration-500 invert dark:invert-0"
-                  />
+                  <div className="absolute inset-0 bg-linear-to-br from-primary-500/10 via-transparent to-indigo-500/10 opacity-0 transition-opacity duration-300 group-hover:opacity-100" />
+                  <div className="relative flex h-20 items-center justify-center rounded-2xl bg-slate-50 p-3 dark:bg-slate-700/70">
+                    <img
+                      src={partner.logo}
+                      alt={partner.name}
+                      loading="lazy"
+                      onError={(e) => {
+                        e.currentTarget.style.display = "none";
+                        e.currentTarget.nextSibling?.classList.remove("hidden");
+                      }}
+                      className="max-h-14 max-w-full object-contain rounded-xl grayscale transition-all duration-500 group-hover:grayscale-0"
+                    />
+                    <div className="hidden text-2xl font-black tracking-wide text-slate-700 dark:text-slate-200">
+                      {getPartnerInitials(partner.name)}
+                    </div>
+                  </div>
+                  <div className="relative mt-4 text-center">
+                    <div className="text-sm font-black tracking-wide text-slate-800 dark:text-slate-100">
+                      {partner.name}
+                    </div>
+                  </div>
                 </motion.a>
               ))}
             </div>
@@ -350,9 +418,9 @@ const Home = () => {
       )}
 
       {/* ─────── STATISTIKA BO'LIMI ─────── */}
-      <section className="py-24 bg-gradient-to-br from-primary-600 to-indigo-700 text-white relative overflow-hidden">
-        <div className="absolute top-0 left-0 w-96 h-96 bg-white/5 rounded-full blur-3xl -z-0" />
-        <div className="absolute bottom-0 right-0 w-96 h-96 bg-white/5 rounded-full blur-3xl -z-0" />
+      <section className="py-24 bg-linear-to-br from-primary-600 to-indigo-700 text-white relative overflow-hidden">
+        <div className="absolute top-0 left-0 w-96 h-96 bg-white/5 rounded-full blur-3xl z-0" />
+        <div className="absolute bottom-0 right-0 w-96 h-96 bg-white/5 rounded-full blur-3xl z-0" />
         <div className="container mx-auto px-4 md:px-6 relative z-10">
           <div className="text-center mb-16">
             <div className="inline-flex items-center gap-2 px-4 py-2 rounded-2xl bg-white/10 backdrop-blur-md text-white text-xs font-black uppercase tracking-widest mb-4">
@@ -501,7 +569,7 @@ const Home = () => {
       {/* ─────── CTA BO'LIMI ─────── */}
       <section className="py-20">
         <div className="container mx-auto px-4 md:px-6">
-          <div className="bg-gradient-to-br from-primary-600 to-indigo-700 rounded-[3rem] p-12 md:p-16 text-white text-center shadow-2xl relative overflow-hidden">
+          <div className="bg-linear-to-br from-primary-600 to-indigo-700 rounded-4xl p-12 md:p-16 text-white text-center shadow-2xl relative overflow-hidden">
             <div className="absolute top-0 left-0 w-80 h-80 bg-white/10 rounded-full blur-3xl" />
             <div className="relative z-10">
               <Sparkles size={40} className="mx-auto mb-6 opacity-80" />

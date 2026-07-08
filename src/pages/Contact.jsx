@@ -17,7 +17,7 @@ const Contact = () => {
       try {
         const { data } = await api.get('/settings');
         setSettings(data || null);
-      } catch (e) { /* ignore */ }
+      } catch { /* ignore */ }
     };
     load();
   }, []);

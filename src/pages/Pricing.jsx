@@ -1,11 +1,13 @@
 import React from "react";
 import { motion } from "framer-motion";
+import { useTranslation } from "react-i18next";
 import { Check, X, Shield, Clock, Zap, Star } from "lucide-react";
 import Sticker from "../components/ui/Sticker";
 import ThreeDCard from "../components/ui/ThreeDCard";
 import FloatingElements from "../components/ui/FloatingElements";
 
 const Pricing = () => {
+  const { t } = useTranslation();
   const plans = [
     {
       name: "Standard",

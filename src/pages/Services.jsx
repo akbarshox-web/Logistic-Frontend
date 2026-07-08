@@ -1,11 +1,13 @@
 import React from "react";
 import { motion } from "framer-motion";
+import { useTranslation } from "react-i18next";
 import { Truck, Ship, Plane, Train, Package, Shield, Clock, MapPin, Zap, Globe, Headphones } from "lucide-react";
 import Sticker from "../components/ui/Sticker";
 import ThreeDCard from "../components/ui/ThreeDCard";
 import FloatingElements from "../components/ui/FloatingElements";
 
 const Services = () => {
+  const { t } = useTranslation();
   const services = [
     {
       icon: Truck,

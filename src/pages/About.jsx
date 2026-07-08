@@ -9,8 +9,32 @@ import api from "../utils/api";
 import { usePartners } from "../context/PartnerContext";
 import { formatDateSync as format } from "../utils/dateUtil";
 
+const partnerFallbackImages = [
+  "https://images.unsplash.com/photo-1520607162513-77705c0f0d4a?auto=format&fit=crop&w=800&q=80",
+  "https://images.unsplash.com/photo-1517048676732-d65bc937f952?auto=format&fit=crop&w=800&q=80",
+  "https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?auto=format&fit=crop&w=800&q=80",
+  "https://images.unsplash.com/photo-1521737604893-d14cc237f11d?auto=format&fit=crop&w=800&q=80"
+];
+
+const normalizePartnerName = (name = "") => name.toLowerCase().trim();
+const isHiddenPartner = (name = "") => ["wedcjksdccsd"].includes(normalizePartnerName(name));
+
+const getPartnerInitials = (name = "Partner") =>
+  name
+    .split(" ")
+    .slice(0, 2)
+    .map((word) => word[0] || "")
+    .join("")
+    .toUpperCase() || "P";
+
+const getPartnerImage = (partner, index) => {
+  const preferred = partner?.logo?.trim();
+  return preferred || partnerFallbackImages[index % partnerFallbackImages.length];
+};
+
 const About = () => {
   const { partners } = usePartners();
+  const visiblePartners = partners.filter((partner) => !isHiddenPartner(partner?.name));
   const [reviews, setReviews] = useState([]);
   const [settings, setSettings] = useState(null);
 
@@ -23,7 +47,7 @@ const About = () => {
         ]);
         setReviews(Array.isArray(rv) ? rv : []);
         setSettings(st || null);
-      } catch (e) { /* ignore */ }
+      } catch { /* ignore */ }
     };
     load();
   }, []);
@@ -36,23 +60,37 @@ const About = () => {
   ];
 
   const values = [
-    { icon: ShieldCheck, color: 'green',  title: 'Ishonchlilik', desc: 'Yuklaringiz xavfsizligi bizning eng oliy ustuvorligimiz.' },
-    { icon: Heart,       color: 'rose',   title: 'G\'amxo\'rlik', desc: 'Har bir mijozga individual yondashamiz.' },
-    { icon: Target,      color: 'blue',   title: 'Aniqlik',      desc: 'Vaqt va sifat — ikkalasi ham muhim.' },
-    { icon: Award,       color: 'amber',  title: 'Sifat',        desc: 'Faqat eng yuqori standartlardagi xizmat.' },
+    { icon: ShieldCheck, color: 'green', title: 'Ishonchlilik', desc: 'Yuklaringiz xavfsizligi bizning eng oliy ustuvorligimiz.' },
+    { icon: Heart, color: 'rose', title: 'G\'amxo\'rlik', desc: 'Har bir mijozga individual yondashamiz.' },
+    { icon: Target, color: 'blue', title: 'Aniqlik', desc: 'Vaqt va sifat — ikkalasi ham muhim.' },
+    { icon: Award, color: 'amber', title: 'Sifat', desc: 'Faqat eng yuqori standartlardagi xizmat.' },
   ];
 
   const team = [
-    { name: 'Aziz Karimov',    role: 'Bosh direktor',     avatar: '', initial: 'A' },
-    { name: 'Malika Yusupova', role: 'Operatsion direktor', avatar: '', initial: 'M' },
-    { name: 'Jasur Toshmatov', role: 'Texnik direktor',     avatar: '', initial: 'J' },
-    { name: 'Dilfuza Rahimova', role: 'Marketing rahbari',  avatar: '', initial: 'D' },
+    {
+      name: 'ERGASHEV AKBARSHOX',
+      role: 'Bosh direktor',
+      avatar: 'https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&w=800&q=80',
+      initial: 'E'
+    },
+    {
+      name: 'MAHKAMBAYEV SUNNAT',
+      role: 'Operatsion direktor',
+      avatar: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=800&q=80',
+      initial: 'M'
+    },
+    {
+      name: 'BOBOYEV ABDURAXMON',
+      role: 'Texnik direktor',
+      avatar: 'https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?auto=format&fit=crop&w=800&q=80',
+      initial: 'B'
+    },
   ];
 
   return (
     <div className="flex flex-col w-full overflow-x-hidden">
       {/* Hero */}
-      <section className="pt-40 pb-20 bg-gradient-to-b from-slate-50 to-white dark:from-slate-900 dark:to-slate-950 relative overflow-hidden">
+      <section className="pt-40 pb-20 bg-linear-to-b from-slate-50 to-white dark:from-slate-900 dark:to-slate-950 relative overflow-hidden">
         <div className="container mx-auto px-4 md:px-6 relative z-10">
           <div className="text-center max-w-4xl mx-auto">
             <motion.div
@@ -105,7 +143,7 @@ const About = () => {
               initial={{ opacity: 0, x: -30 }}
               whileInView={{ opacity: 1, x: 0 }}
               viewport={{ once: true }}
-              className="p-10 rounded-[2.5rem] bg-gradient-to-br from-primary-600 to-indigo-700 text-white shadow-2xl"
+              className="p-10 rounded-[2.5rem] bg-linear-to-br from-primary-600 to-indigo-700 text-white shadow-2xl"
             >
               <div className="w-16 h-16 bg-white/20 backdrop-blur-md rounded-2xl flex items-center justify-center mb-6">
                 <Target size={28} />
@@ -171,7 +209,7 @@ const About = () => {
             <div className="text-primary-600 font-black tracking-widest uppercase text-xs mb-3">Jamoamiz</div>
             <h2 className="text-4xl md:text-5xl font-black text-slate-900 dark:text-white tracking-tighter">Bizning <span className="gradient-text">Mutaxassislar</span></h2>
           </div>
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
             {team.map((m, i) => (
               <motion.div
                 key={i}
@@ -181,7 +219,7 @@ const About = () => {
                 transition={{ delay: i * 0.1 }}
                 className="text-center group"
               >
-                <div className="w-32 h-32 mx-auto mb-4 rounded-3xl overflow-hidden bg-gradient-to-br from-primary-600 to-indigo-700 flex items-center justify-center text-white text-5xl font-black shadow-2xl shadow-primary-500/20 group-hover:scale-105 transition-transform">
+                <div className="w-32 h-32 mx-auto mb-4 rounded-3xl overflow-hidden bg-linear-to-br from-primary-600 to-indigo-700 flex items-center justify-center text-white text-5xl font-black shadow-2xl shadow-primary-500/20 group-hover:scale-105 transition-transform">
                   {m.avatar ? (
                     <img src={m.avatar} alt={m.name} className="w-full h-full object-cover" />
                   ) : (
@@ -243,7 +281,7 @@ const About = () => {
       )}
 
       {/* Partners */}
-      {partners.length > 0 && (
+      {visiblePartners.length > 0 && (
         <section className="py-20 bg-white dark:bg-slate-900">
           <div className="container mx-auto px-4 md:px-6">
             <div className="text-center mb-12">
@@ -251,15 +289,35 @@ const About = () => {
               <h2 className="text-4xl md:text-5xl font-black text-slate-900 dark:text-white tracking-tighter">Ishonchli <span className="gradient-text">Hamkorlar</span></h2>
             </div>
             <div className="flex flex-wrap justify-center gap-8">
-              {partners.map((p) => (
+              {visiblePartners.map((p, index) => (
                 <a
                   key={p._id}
                   href={p.website || '#'}
                   target="_blank"
                   rel="noreferrer"
-                  className="w-40 h-24 flex items-center justify-center p-5 bg-slate-50 dark:bg-slate-800 rounded-2xl border border-slate-100 dark:border-slate-700 hover:border-primary-500/30 transition-all"
+                  className="w-40 h-28 flex flex-col items-center justify-center gap-2 p-4 bg-slate-50 dark:bg-slate-800 rounded-2xl border border-slate-100 dark:border-slate-700 hover:border-primary-500/30 transition-all"
                 >
-                  <img src={p.logo} alt={p.name} className="max-h-full max-w-full object-contain dark:invert" />
+                  <img
+                    src={getPartnerImage(p, index)}
+                    alt={p.name}
+                    loading="lazy"
+                    onError={(e) => {
+                      if (e.currentTarget.dataset.fallbackApplied === "true") {
+                        e.currentTarget.style.display = "none";
+                        e.currentTarget.nextSibling?.classList.remove("hidden");
+                        return;
+                      }
+                      e.currentTarget.dataset.fallbackApplied = "true";
+                      e.currentTarget.src = partnerFallbackImages[index % partnerFallbackImages.length];
+                    }}
+                    className="max-h-12 max-w-full object-contain rounded-lg"
+                  />
+                  <div className="text-sm font-black tracking-wide text-slate-700 dark:text-slate-200 text-center">
+                    {p.name || "Global Partner"}
+                  </div>
+                  <div className={`text-lg font-black tracking-wide text-slate-700 dark:text-slate-200 ${p.logo ? 'hidden' : 'flex'}`}>
+                    {getPartnerInitials(p.name)}
+                  </div>
                 </a>
               ))}
             </div>
@@ -270,12 +328,12 @@ const About = () => {
       {/* CTA */}
       <section className="py-20">
         <div className="container mx-auto px-4 md:px-6">
-          <div className="bg-gradient-to-br from-primary-600 to-indigo-700 rounded-[3rem] p-12 md:p-16 text-white text-center shadow-2xl">
+          <div className="bg-linear-to-br from-primary-600 to-indigo-700 rounded-[3rem] p-12 md:p-16 text-white text-center shadow-2xl">
             <Sparkles size={40} className="mx-auto mb-6 opacity-80" />
             <h2 className="text-4xl md:text-5xl font-black mb-4 tracking-tighter">Bizga qo'shiling</h2>
             <p className="text-white/80 text-lg max-w-2xl mx-auto mb-8">
-            LogisticPro — bu ishonchli logistika hamkori. Hoziroq buyurtma bering yoki biz bilan bog'laning.
-          </p>
+              LogisticPro — bu ishonchli logistika hamkori. Hoziroq buyurtma bering yoki biz bilan bog'laning.
+            </p>
             <div className="flex flex-col sm:flex-row gap-3 justify-center">
               <Link to="/buyurtma" className="bg-white text-primary-600 px-8 py-4 rounded-2xl font-black hover:shadow-xl transition-all inline-flex items-center justify-center gap-2">
                 Buyurtma berish <ArrowRight size={18} />

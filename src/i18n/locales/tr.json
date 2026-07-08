@@ -1,0 +1,354 @@
+{
+  "common": {
+    "loading": "Yükleniyor...",
+    "save": "Kaydet",
+    "cancel": "İptal",
+    "edit": "Düzenle",
+    "delete": "Sil",
+    "search": "Ara",
+    "send": "Gönder",
+    "submit": "Gönder",
+    "back": "Geri",
+    "next": "İleri",
+    "previous": "Önceki",
+    "yes": "Evet",
+    "no": "Hayır",
+    "all": "Tümü",
+    "more": "Daha fazla",
+    "close": "Kapat",
+    "open": "Aç",
+    "error": "Hata",
+    "success": "Başarılı",
+    "warning": "Uyarı",
+    "info": "Bilgi",
+    "language": "Dil",
+    "darkMode": "Karanlık mod",
+    "lightMode": "Aydınlık mod",
+    "viewAll": "Tümünü gör",
+    "seeMore": "Daha fazla gör",
+    "from": "şuradan",
+    "to": "şuraya"
+  },
+  "nav": {
+    "home": "Ana sayfa",
+    "services": "Hizmetler",
+    "pricing": "Fiyatlar",
+    "about": "Hakkımızda",
+    "faq": "SSS",
+    "contact": "İletişim",
+    "order": "Sipariş",
+    "tracking": "Takip",
+    "admin": "Yönetici",
+    "login": "Giriş",
+    "logout": "Çıkış",
+    "register": "Kayıt ol",
+    "profile": "Profil",
+    "myOrders": "Siparişlerim",
+    "notifications": "Bildirimler",
+    "start": "Başla",
+    "placeOrder": "Sipariş ver"
+  },
+  "footer": {
+    "tagline": "Dünya genelinde yük taşımacılığı ve lojistik çözümleri sunan lider bir şirkettir. Yükünüz bizim sorumluluğumuzdur.",
+    "company": "Şirket",
+    "contactTitle": "İletişim",
+    "newsletter": "Bülten",
+    "newsletterDesc": "En son promosyonlar ve haberlerden haberdar olun.",
+    "emailPlaceholder": "E-posta adresiniz",
+    "copyright": "Geleceğin lojistiği.",
+    "privacy": "Gizlilik Politikası",
+    "terms": "Kullanım Şartları",
+    "address": "Logistic Business Center, 108 Global Ave",
+    "phone": "+998 71 200 00 00",
+    "email": "info@logisticpro.uz",
+    "social": {
+      "facebook": "Facebook",
+      "instagram": "Instagram",
+      "twitter": "Twitter",
+      "linkedin": "Linkedin"
+    },
+    "links": {
+      "home": "Ana sayfa",
+      "services": "İş Hizmetleri",
+      "pricing": "Fiyatlandırma",
+      "tracking": "Yük Takibi",
+      "about": "Hakkımızda",
+      "faq": "SSS",
+      "contact": "İletişim"
+    }
+  },
+  "home": {
+    "hero": {
+      "badge": "YENİ LOJİSTİK TEKNOLOJİSİ",
+      "title": "Yükünüzü",
+      "titleHighlight": "hızlı ve güvenilir",
+      "titleEnd": "teslim ediyoruz",
+      "subtitle": "Modern lojistik çözümleriyle işinizi küresel ölçeğe taşıyın. Hızlı, güvenli ve şeffaf hizmet.",
+      "cta": "Sipariş ver",
+      "ctaSecondary": "Daha fazla bilgi"
+    },
+    "stats": {
+      "deliveries": "Başarılı teslimat",
+      "countries": "Ülke",
+      "clients": "Mutlu müşteri",
+      "experience": "Yıllık deneyim"
+    },
+    "features": {
+      "title": "Neden biz?",
+      "subtitle": "Lojistik ihtiyaçlarınız için en iyi çözümleri sunuyoruz",
+      "fast": {
+        "title": "Hızlı teslimat",
+        "desc": "Yükünüzü en kısa sürede teslim ediyoruz"
+      },
+      "secure": {
+        "title": "Güvenlik",
+        "desc": "Yükünüz tamamen sigortalı ve korunmuştur"
+      },
+      "tracking": {
+        "title": "Online takip",
+        "desc": "Yükünüzün durumunu istediğiniz zaman takip edin"
+      },
+      "support": {
+        "title": "7/24 Destek",
+        "desc": "Her zaman iletişimdeyiz, her soruyu yanıtlarız"
+      }
+    }
+  },
+  "auth": {
+    "login": {
+      "title": "Giriş yap",
+      "subtitle": "Hesabınıza giriş yapın ve hizmetlerimizi kullanın",
+      "email": "E-posta",
+      "password": "Şifre",
+      "remember": "Beni hatırla",
+      "submit": "Giriş yap",
+      "noAccount": "Hesabınız yok mu?",
+      "register": "Kayıt ol",
+      "forgot": "Şifrenizi mi unuttunuz?",
+      "orContinue": "veya",
+      "googleLogin": "Google ile giriş yap"
+    },
+    "register": {
+      "title": "Kayıt ol",
+      "subtitle": "Yeni bir hesap oluşturun ve lojistik hizmetlerimizi kullanın",
+      "name": "Ad",
+      "email": "E-posta",
+      "phone": "Telefon numarası",
+      "password": "Şifre",
+      "confirmPassword": "Şifreyi onayla",
+      "submit": "Kayıt ol",
+      "haveAccount": "Zaten hesabınız var mı?",
+      "login": "Giriş yap",
+      "agree": "Kullanım şartlarını kabul ediyorum",
+      "selectRole": "Rol seçin",
+      "client": "Müşteri",
+      "driver": "Sürücü"
+    },
+    "verify": {
+      "title": "E-postayı doğrula",
+      "subtitle": "E-postanıza gönderilen kodu girin",
+      "code": "Doğrulama kodu",
+      "submit": "Doğrula",
+      "resend": "Kodu tekrar gönder",
+      "noCode": "Kod gelmedi mi?"
+    }
+  },
+  "order": {
+    "title": "Sipariş ver",
+    "subtitle": "Yükünüzün bilgilerini girin, sizinle iletişime geçelim",
+    "fromAddress": "Nereden",
+    "toAddress": "Nereye",
+    "cargoType": "Yük türü",
+    "weight": "Ağırlık (kg)",
+    "volume": "Hacim (m³)",
+    "date": "Teslimat tarihi",
+    "description": "Ek bilgi",
+    "name": "Adınız",
+    "phone": "Telefon numarası",
+    "submit": "Sipariş ver",
+    "success": "Siparişiniz alındı! Yakında iletişime geçeceğiz.",
+    "calculate": "Fiyatı hesapla",
+    "estimatedPrice": "Tahmini fiyat",
+    "selectType": "Yük türünü seçin",
+    "types": {
+      "documents": "Belgeler",
+      "parcel": "Paket",
+      "furniture": "Mobilya",
+      "fragile": "Kırılgan eşyalar",
+      "vehicle": "Araç",
+      "other": "Diğer"
+    }
+  },
+  "tracking": {
+    "title": "Yük takibi",
+    "subtitle": "Sipariş numaranızı girin ve yükünüzün durumunu takip edin",
+    "placeholder": "Sipariş numarasını girin",
+    "track": "Takip et",
+    "status": "Durum",
+    "estimatedDelivery": "Tahmini teslimat",
+    "currentLocation": "Mevcut konum",
+    "history": "Geçmiş",
+    "notFound": "Sipariş bulunamadı. Numarayı kontrol edin.",
+    "statuses": {
+      "created": "Oluşturuldu",
+      "accepted": "Kabul edildi",
+      "picked_up": "Yüklendi",
+      "in_transit": "Yolda",
+      "delivered": "Teslim edildi",
+      "cancelled": "İptal edildi"
+    }
+  },
+  "about": {
+    "title": "Hakkımızda",
+    "subtitle": "Lojistik alanında 10+ yıllık deneyime sahibiz",
+    "mission": "Misyonumuz",
+    "missionText": "Müşterilerimize en hızlı, güvenilir ve modern lojistik hizmetlerini sunmak.",
+    "vision": "Vizyonumuz",
+    "visionText": "Orta Asya'nın en gelişmiş lojistik şirketi olmak.",
+    "values": "Değerlerimiz",
+    "team": "Ekibimiz",
+    "history": "Tarihçe"
+  },
+  "services": {
+    "title": "Hizmetlerimiz",
+    "subtitle": "Her ihtiyaç için profesyonel lojistik çözümleri",
+    "land": {
+      "title": "Kara taşımacılığı",
+      "desc": "Kara ve demiryolu ile yük taşımacılığı"
+    },
+    "air": {
+      "title": "Hava taşımacılığı",
+      "desc": "Hızlı teslimat için hava yolu hizmetleri"
+    },
+    "sea": {
+      "title": "Deniz taşımacılığı",
+      "desc": "Büyük hacimli yükler için denizyolu"
+    },
+    "warehouse": {
+      "title": "Depo",
+      "desc": "Yük depolama ve yönetim hizmetleri"
+    },
+    "customs": {
+      "title": "Gümrük hizmetleri",
+      "desc": "Belge işlemleri ve gümrük yardımı"
+    },
+    "express": {
+      "title": "Ekspres teslimat",
+      "desc": "24 saat içinde acil teslimat hizmeti"
+    }
+  },
+  "pricing": {
+    "title": "Fiyatlandırma",
+    "subtitle": "Şeffaf ve adil fiyatlandırma",
+    "month": "aylık",
+    "year": "yıllık",
+    "basic": {
+      "title": "Temel",
+      "subtitle": "Küçük işletmeler için"
+    },
+    "pro": {
+      "title": "Profesyonel",
+      "subtitle": "Orta ölçekli işletmeler için"
+    },
+    "enterprise": {
+      "title": "Kurumsal",
+      "subtitle": "Büyük şirketler için"
+    },
+    "choose": "Seç",
+    "popular": "Popüler",
+    "features": {
+      "shipments": "gönderi",
+      "tracking": "Online takip",
+      "support": "Destek",
+      "warehouse": "Depo",
+      "manager": "Kişisel yönetici"
+    }
+  },
+  "contact": {
+    "title": "Bizimle iletişime geçin",
+    "subtitle": "Sorularınız mı var? Yardımcı oluruz!",
+    "name": "Adınız",
+    "email": "E-posta",
+    "phone": "Telefon",
+    "message": "Mesajınız",
+    "submit": "Gönder",
+    "success": "Mesajınız gönderildi! Yakında yanıt vereceğiz.",
+    "address": "Adres",
+    "phoneLabel": "Telefon",
+    "emailLabel": "E-posta",
+    "workingHours": "Çalışma saatleri",
+    "workingHoursValue": "Pzt - Cmt: 09:00 - 18:00"
+  },
+  "faq": {
+    "title": "Sıkça sorulan sorular",
+    "subtitle": "En sık sorulan soruların yanıtları",
+    "noAnswer": "Cevap bulamadınız mı?",
+    "contactUs": "Bizimle iletişime geçin"
+  },
+  "profile": {
+    "title": "Profilim",
+    "personal": "Kişisel bilgiler",
+    "security": "Güvenlik",
+    "settings": "Ayarlar",
+    "name": "Ad",
+    "email": "E-posta",
+    "phone": "Telefon",
+    "address": "Adres",
+    "changePassword": "Şifre değiştir",
+    "currentPassword": "Mevcut şifre",
+    "newPassword": "Yeni şifre",
+    "confirmPassword": "Şifreyi onayla",
+    "save": "Kaydet",
+    "saved": "Veriler kaydedildi",
+    "avatar": "Profil resmi"
+  },
+  "myOrders": {
+    "title": "Siparişlerim",
+    "noOrders": "Henüz sipariş yok",
+    "createFirst": "İlk siparişinizi verin",
+    "orderNumber": "Sipariş numarası",
+    "date": "Tarih",
+    "status": "Durum",
+    "from": "Nereden",
+    "to": "Nereye",
+    "price": "Fiyat",
+    "details": "Detaylar"
+  },
+  "notifications": {
+    "title": "Bildirimler",
+    "noNotifications": "Henüz bildirim yok",
+    "markAllRead": "Tümünü okundu olarak işaretle",
+    "new": "Yeni"
+  },
+  "admin": {
+    "dashboard": "Yönetim paneli",
+    "users": "Kullanıcılar",
+    "orders": "Siparişler",
+    "drivers": "Sürücüler",
+    "statistics": "İstatistikler",
+    "activityLog": "Etkinlik günlüğü",
+    "settings": "Ayarlar",
+    "totalUsers": "Toplam kullanıcı",
+    "totalOrders": "Toplam sipariş",
+    "revenue": "Gelir",
+    "activeDrivers": "Aktif sürücüler"
+  },
+  "driver": {
+    "panel": "Sürücü paneli",
+    "availableOrders": "Mevcut siparişler",
+    "myTrips": "Yolculuklarım",
+    "earnings": "Kazançlar",
+    "accept": "Kabul et",
+    "start": "Başla",
+    "complete": "Tamamla",
+    "online": "Çevrimiçi",
+    "offline": "Çevrimdışı"
+  },
+  "errors": {
+    "404": "Sayfa bulunamadı",
+    "404desc": "Aradığınız sayfa mevcut değil",
+    "500": "Sunucu hatası",
+    "500desc": "Sunucuda bir hata oluştu. Lütfen daha sonra tekrar deneyin.",
+    "goHome": "Ana sayfaya dön"
+  }
+}
