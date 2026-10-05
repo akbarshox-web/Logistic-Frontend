@@ -4,6 +4,7 @@ import { AuthProvider, useAuth } from "./context/AuthContext";
 import { ThemeProvider } from "./context/ThemeContext";
 import { PartnerProvider } from "./context/PartnerContext";
 import ProtectedRoute from "./components/ProtectedRoute";
+import { useTranslation } from "react-i18next";
 
 // ✅ Asosiy sahifalar
 import Home from "./pages/Home";
@@ -59,8 +60,17 @@ const RoleRoute = () => {
 // ✅ Router ichidagi komponent — useLocation ishlaydi
 function AppRoutes() {
   const location = useLocation();
+  const { i18n } = useTranslation();
   const isPanelRoute = PANEL_ROUTES.some(r => location.pathname.startsWith(r));
   const isAuthRoute = AUTH_ROUTES.some(r => location.pathname.startsWith(r));
+
+  // ✅ RTL (Right-to-Left) support for Arabic language
+  useEffect(() => {
+    const lang = i18n.language;
+    const dir = lang === 'ar' ? 'rtl' : 'ltr';
+    document.documentElement.dir = dir;
+    document.documentElement.lang = lang;
+  }, [i18n.language]);
 
   return (
     <div className="app min-h-screen transition-colors duration-300 bg-white dark:bg-slate-900">
